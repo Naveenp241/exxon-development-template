@@ -42,7 +42,8 @@ export const config: TemplateConfig = {
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `exxon/${document.slug}`; // or use brand, type, etc.
+  const prefix = document.name === "Exxon" ? "exxon" : "generic";
+  return `${prefix}/${document.slug}`;
 };
 
 export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
