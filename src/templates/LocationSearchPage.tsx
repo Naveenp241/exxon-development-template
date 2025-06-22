@@ -15,7 +15,7 @@ import "../index.css";
 // Define the searcher outside the component
 const locationSearcher = provideHeadless({
   apiKey: "93809071953b06ec5b349f7ab68118e9",
-  experienceKey: "locator-1",
+  experienceKey: "locator-14",
   locale: "en",
   endpoints: {
     universalSearch: "https://sandbox-cdn.yextapis.com/v2/accounts/me/search/universal/query",

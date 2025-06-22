@@ -48,7 +48,7 @@ export const getHeadConfig: GetHeadConfig<TemplateProps> = ({ document }) => ({
 
  const searchConfig: SearchConfig = {
   apiKey: "93809071953b06ec5b349f7ab68118e9",
-  experienceKey: "locator-1",
+  experienceKey: "locator-13",
   locale: "en",
   verticalKey: "locations",       // <- use the one from your verticals
   experienceVersion: "PRODUCTION",   // <- or "PRODUCTION"

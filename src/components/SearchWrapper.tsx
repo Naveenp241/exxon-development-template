@@ -5,7 +5,7 @@ import {
 
 const searchWrapperSearcher = provideHeadless({
   apiKey: "93809071953b06ec5b349f7ab68118e9", // your actual API key from Yext
-  experienceKey: "locator-1", // your experience key from Yext
+  experienceKey: "locator-15", // your experience key from Yext
   locale: "en",
 });
 
