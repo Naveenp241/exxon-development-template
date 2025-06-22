@@ -46,7 +46,7 @@ export const config: TemplateConfig = {
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `${document.slug.toString()}`;
+  return `exxon/${document.slug}`; // or use brand, type, etc.
 };
 
 export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
