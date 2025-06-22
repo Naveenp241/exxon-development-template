@@ -1,0 +1,46 @@
+.cmp-nav__title {
+    border-top: 4px solid transparent;
+    padding-top: 32px;
+    padding-bottom: 36px;
+}
+
+.cmp-nav__title:focus-visible,
+.cmp-nav__title:hover {
+    border-top: 4px solid #fe000c
+}
+
+.cmp-nav__list {
+    max-width: 332px;
+    width: 100%;
+    display: none;
+    padding: 40px 23px;
+    border: 1px solid #d1d3d4;
+    z-index: 99;
+    background: #fff;
+}
+
+.cmp-nav__wrapper.active .cmp-nav__list {
+    display: block;
+}
+
+.cmp-nav__wrapper.active .cmp-nav__title {
+    color: #fe000c;
+    border-top: 4px solid #fe000c;
+}
+
+.cmp-nav__sublist-title {
+    font-size: 1rem;
+    line-height: 24px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    /* transition: all .5s ease; */
+}
+
+.cmp-nav__sublist-title:hover {
+    color: #fe000c;
+}
+
+.cmp-nav__sublist-item:hover a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
