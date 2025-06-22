@@ -13,7 +13,7 @@ import CustomSearchBar from "../components/CustomSearchBar";
 import "../index.css";
 
 // Define the searcher outside the component
-const searcher = provideHeadless({
+const locationSearcher = provideHeadless({
   apiKey: "93809071953b06ec5b349f7ab68118e9",
   experienceKey: "locator-1",
   locale: "en",
@@ -52,7 +52,7 @@ const SearchPageInner = () => {
 
 const LocationSearchPage = (props: TemplateRenderProps) => {
   return (
-    <SearchHeadlessProvider searcher={searcher}>
+    <SearchHeadlessProvider searcher={locationSearcher}>
       <SearchPageInner />
     </SearchHeadlessProvider>
   );

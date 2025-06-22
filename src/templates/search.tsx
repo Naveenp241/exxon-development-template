@@ -55,11 +55,11 @@ export const getHeadConfig: GetHeadConfig<TemplateProps> = ({ document }) => ({
   headlessId: "locator-search",   // <- can be any string
 };
 
-const searcher = provideHeadless(searchConfig);
+const searcherSearch = provideHeadless(searchConfig);
 
 const Search: Template<TemplateProps> = () => {
   return (
-    <SearchHeadlessProvider searcher={searcher}>
+    <SearchHeadlessProvider searcher={searcherSearch}>
         <div className="flex flex-col h-screen">
           <div className="bg-blue-900 p-4 text-white text-xl font-bold flex items-center justify-between">
             <span>Find Nearby</span>

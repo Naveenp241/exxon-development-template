@@ -58,10 +58,10 @@ const MobilSearchPage: Template<TemplateProps> = () => {
     headlessId: "locator-search",
   };
 
-  const searcher = provideHeadless(searchConfig);
+  const mobilSearcher = provideHeadless(searchConfig);
 
   return (
-    <SearchHeadlessProvider searcher={searcher}>
+    <SearchHeadlessProvider searcher={mobilSearcher}>
       <div className="flex flex-col h-screen">
         <div className="px-8 pt-6">
           <h1 className="text-2xl font-semibold text-gray-800">
