@@ -25,6 +25,7 @@ const Location: Template<TemplateRenderProps> = ({
   return (
     <>
       <PageLayout templateData={{ __meta, document }}>
+        <div className="test-box">Tailwind test box</div>
         <Banner name={name} address={address} />
         <div className="centered-container">
           <BreadCrumbs

@@ -21,3 +21,5 @@ const ResultCard = ({ result }: { result: LocationProfile }) => {
     </div>
   );
 };
+
+export default ResultCard;

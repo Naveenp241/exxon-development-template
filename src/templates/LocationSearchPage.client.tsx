@@ -18,6 +18,11 @@ const LocationSearchPage = () => {
       apiKey: "93809071953b06ec5b349f7ab68118e9", // your actual API key from Yext
       experienceKey: "locator-1", // your experience key from Yext
       locale: "en",
+      endpoints: {
+        universalSearch: "https://sandbox-cdn.yextapis.com/v2/accounts/me/search/universal/query",
+        verticalSearch: "https://sandbox-cdn.yextapis.com/v2/accounts/me/search/vertical/query",
+        questionSubmission: "https://sandbox-cdn.yextapis.com/v2/accounts/me/create/question"
+      }
     }}>
       <div className="flex flex-col md:flex-row h-[100vh]">
         <div className="w-full md:w-1/2 p-4 overflow-y-auto bg-gray-50">
