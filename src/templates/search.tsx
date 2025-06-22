@@ -39,7 +39,7 @@ export const config: TemplateConfig = {
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `${document.slug}`;
+  return `location-search/${document.slug}`;
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateProps> = ({ document }) => ({
