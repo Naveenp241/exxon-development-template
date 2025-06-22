@@ -51,7 +51,7 @@ const MobilSearchPage: Template<TemplateProps> = () => {
   // ✅ Moved searchConfig and provideHeadless inside the component to avoid TDZ
   const searchConfig: SearchConfig = {
     apiKey: "93809071953b06ec5b349f7ab68118e9",
-    experienceKey: "locator-1",
+    experienceKey: "locator-12",
     locale: "en",
     verticalKey: "locations",
     experienceVersion: "PRODUCTION",
