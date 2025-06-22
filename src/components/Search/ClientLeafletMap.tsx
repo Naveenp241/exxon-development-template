@@ -12,6 +12,7 @@ import {
   useSearchState,
 } from "@yext/search-headless-react";
 
+// Helper to create numbered Leaflet markers
 function createNumberedIcon(number: number) {
   return L.divIcon({
     html: `
@@ -32,16 +33,20 @@ function createNumberedIcon(number: number) {
 const ClientLeafletMap = () => {
   const searchActions = useSearchActions();
   const results = useSearchState((state) => state.vertical.results);
-  const [center, setCenter] = useState<[number, number]>([37.7749, -122.4194]);
+  const [center, setCenter] = useState<[number, number]>([37.7749, -122.4194]); // Default to San Francisco
 
+  // Run vertical query on mount
   useEffect(() => {
     searchActions.executeVerticalQuery();
   }, []);
 
+  // Center map on first result
   useEffect(() => {
     if (results?.length) {
-      const first = results[0].rawData?.yextDisplayCoordinate;
-      if (first) setCenter([first.latitude, first.longitude]);
+      const firstCoord = results[0].rawData?.yextDisplayCoordinate;
+      if (firstCoord) {
+        setCenter([firstCoord.latitude, firstCoord.longitude]);
+      }
     }
   }, [results]);
 
@@ -52,15 +57,20 @@ const ClientLeafletMap = () => {
           attribution='&copy; OpenStreetMap contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {results?.map((r, i) => {
-          const coord = r.rawData.yextDisplayCoordinate;
+        {results?.map((result, index) => {
+          const coord = result.rawData?.yextDisplayCoordinate;
           if (!coord) return null;
+
           return (
-            <Marker key={i} position={[coord.latitude, coord.longitude]} icon={createNumberedIcon(i + 1)}>
+            <Marker
+              key={index}
+              position={[coord.latitude, coord.longitude]}
+              icon={createNumberedIcon(index + 1)}
+            >
               <Popup>
-                <strong>{r.name}</strong>
+                <strong>{result.name}</strong>
                 <br />
-                {r.rawData.address.line1}, {r.rawData.address.city}
+                {result.rawData.address?.line1}, {result.rawData.address?.city}
               </Popup>
             </Marker>
           );

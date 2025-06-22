@@ -15,13 +15,14 @@ import {
   Matcher,
 } from "@yext/search-headless-react";
 
-// Create numbered custom marker icon
+// Helper to create numbered Leaflet markers with red (default) or blue (selected)
 function createNumberedIcon(number: number, isSelected: boolean) {
   return L.divIcon({
     html: `
       <div style="position: relative; width: 36px; height: 54px;">
         <svg width="36" height="54" viewBox="0 0 36 54" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 0C8.05888 0 0 8.05888 0 18C0 28.2843 18 54 18 54C18 54 36 28.2843 36 18C36 8.05888 27.9411 0 18 0Z" fill="${isSelected ? "#1D4ED8" : "#DC2626"}"/>
+          <path d="M18 0C8.05888 0 0 8.05888 0 18C0 28.2843 18 54 18 54C18 54 36 28.2843 36 18C36 8.05888 27.9411 0 18 0Z"
+            fill="${isSelected ? "#1D4ED8" : "#DC2626"}"/>
         </svg>
         <div style="
           position: absolute;
@@ -44,8 +45,7 @@ function createNumberedIcon(number: number, isSelected: boolean) {
   });
 }
 
-
-// ✅ New: Component to zoom to first result
+// Zoom to first result when results change
 const ZoomToFirst = ({ position }: { position: [number, number] }) => {
   const map = useMap();
 
@@ -61,11 +61,11 @@ const ZoomToFirst = ({ position }: { position: [number, number] }) => {
 const MobilLeafletMap = () => {
   const searchActions = useSearchActions();
   const results = useSearchState((state) => state.vertical.results);
-  const [center, setCenter] = useState<[number, number]>([37.7749, -122.4194]);
+  const [center, setCenter] = useState<[number, number]>([37.7749, -122.4194]); // Default to SF
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const mapRef = useRef<L.Map | null>(null);
 
-  // Perform initial query with static filter + geo
+  // Initial query: filter for Mobil stations + user location
   useEffect(() => {
     searchActions.setStaticFilters([
       {
@@ -79,9 +79,8 @@ const MobilLeafletMap = () => {
       },
     ]);
 
-    // Set static geo location (hardcoded)
     searchActions.setUserLocation({
-      latitude: 44.81380920000001,
+      latitude: 44.8138092,
       longitude: -68.8045398,
     });
 
@@ -89,7 +88,7 @@ const MobilLeafletMap = () => {
     searchActions.executeVerticalQuery();
   }, []);
 
-  // Update center on first result load
+  // Center map on first result
   useEffect(() => {
     if (results?.length) {
       const first = results[0]?.rawData?.yextDisplayCoordinate;
@@ -99,23 +98,23 @@ const MobilLeafletMap = () => {
     }
   }, [results]);
 
+  // Move map to selected result
   useEffect(() => {
-  if (selectedIndex !== null && results?.[selectedIndex]) {
-    const coord = results[selectedIndex]?.rawData?.yextDisplayCoordinate;
-    if (coord && mapRef.current) {
-      mapRef.current.setView([coord.latitude, coord.longitude], 15);
+    if (selectedIndex !== null && results?.[selectedIndex]) {
+      const coord = results[selectedIndex]?.rawData?.yextDisplayCoordinate;
+      if (coord && mapRef.current) {
+        mapRef.current.setView([coord.latitude, coord.longitude], 15);
+      }
     }
-  }
-}, [selectedIndex, results]);
-
+  }, [selectedIndex, results]);
 
   return (
     <div className="relative h-screen w-full">
-      {/* Map Full Background */}
+      {/* 📍 Fullscreen Map */}
       <MapContainer
         center={center}
         zoom={10}
-        whenCreated={(mapInstance) => { mapRef.current = mapInstance }}
+        whenCreated={(mapInstance) => { mapRef.current = mapInstance; }}
         className="absolute top-0 left-0 h-full w-full z-0"
       >
         <ZoomToFirst position={center} />
@@ -126,7 +125,7 @@ const MobilLeafletMap = () => {
         />
 
         {results?.map((r, i) => {
-          const coord = r.rawData.yextDisplayCoordinate;
+          const coord = r.rawData?.yextDisplayCoordinate;
           if (!coord) return null;
 
           return (
@@ -137,22 +136,24 @@ const MobilLeafletMap = () => {
             >
               <Popup autoOpen={selectedIndex === i}>
                 <strong>{r.name}</strong><br />
-                {r.rawData.address.line1}, {r.rawData.address.city}
+                {r.rawData.address?.line1}, {r.rawData.address?.city}
               </Popup>
             </Marker>
           );
         })}
       </MapContainer>
 
-      {/* Search Panel Overlay */}
-      <div className="absolute top-4 left-4 bg-white shadow-lg z-10 width-540 max-h-[560px] overflow-scroll">
+      {/* 🔍 Side Panel */}
+      <div className="absolute top-4 left-4 bg-white shadow-lg z-10 w-[540px] max-h-[560px] overflow-y-auto rounded-md">
         <StationSearchBar />
         <div className="p-4 space-y-3">
           <div className="text-sm">
             Showing {results?.length || 0} stations near you
           </div>
           {results?.map((r, i) => (
-            <div key={i} className="border-t pt-3"
+            <div
+              key={i}
+              className="border-t pt-3 cursor-pointer hover:bg-gray-50 rounded transition"
               onClick={() => setSelectedIndex(i)}
             >
               <div className="text-xs text-gray-500 mb-1">
@@ -163,12 +164,14 @@ const MobilLeafletMap = () => {
                 {i + 1}. {r.name}
               </div>
               <div className="text-sm text-gray-700 mb-2">
-                {r.rawData.address.line1},<br />
-                {r.rawData.address.city}, {r.rawData.address.region}{" "}
-                {r.rawData.address.postalCode}
+                {r.rawData.address?.line1},<br />
+                {r.rawData.address?.city}, {r.rawData.address?.region}{" "}
+                {r.rawData.address?.postalCode}
               </div>
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${r.rawData.address.line1},${r.rawData.address.city}`}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                  `${r.rawData.address?.line1}, ${r.rawData.address?.city}`
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-blue-700 text-white text-sm px-3 py-1 rounded hover:bg-blue-800"
