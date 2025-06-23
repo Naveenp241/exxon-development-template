@@ -14,6 +14,7 @@
     margin: auto;
     margin-bottom: 0;
     max-width: 57.14286%;
+    z-index: 2;
 }
 
 .cmp-hero--corporate-main .cmp-hero__content {
@@ -24,12 +25,6 @@
     padding: 36px;
 }
 
-@media (max-width: 768px) {
-    .cmp-hero--corporate-main .cmp-hero__content {
-        padding: 16px;
-        margin-left: 16px;
-    }
-}
 .cmp-hero--fuels-hero .cmp-hero__content {
     margin: unset;
     margin-bottom: auto;
@@ -44,19 +39,26 @@
 .cmp-hero--corporate-main .cmp-hero__cta a {
     background: #fe000c;
     color: #fff;
+    padding: 8px 16px;
+}
+.cmp-hero--corporate-main .cmp-hero__cta a .anchor-btn__arrow {
+    position: relative;
+    padding-left: 8px;
 }
 
 .cmp-hero--corporate-main .cmp-hero__cta a:hover {
     background: #d5000a;
 }
 
-.cmp-hero--fuels-hero .cmp-hero__cta a {
+.cmp-hero--fuels-hero .cmp-hero__cta a.anchor-btn {
     background: #2369bd;
     color: #fff;
+    padding: 8px 24px;
+    font-size: 14px;
 }
 
 
-.cmp-hero--fuels-hero .cmp-hero__cta a:hover {
+.cmp-hero--fuels-hero .cmp-hero__cta a.anchor-btn:hover {
     background: #0c479d;
     text-decoration: underline;
 }
@@ -69,4 +71,30 @@
 .cmp-hero__subtext::first-letter,
 .cmp-hero__title::first-letter {
   text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .cmp-hero {
+        background-image: unset !important;
+        flex-direction: column;
+        max-height: unset;
+    }
+
+    .cmp-hero--corporate-main .cmp-hero__content {
+        padding: 16px;
+        margin-left: 16px;
+    }
+
+    .cmp-hero__content {
+        margin: 0;
+        max-width: unset;
+        width: 100%;
+    }
+}
+
+@media (max-width: 567px) {
+    .cmp-hero--mobile-img img {
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+    }
 }

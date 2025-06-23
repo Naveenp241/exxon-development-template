@@ -1,0 +1,39 @@
+.mobil-homepage .embla__dots--v1,
+.mobil-homepage .embla__slide {
+    padding: 0;
+}
+
+.mobil-homepage .embla {
+    padding-top: 16px;
+}
+
+.mobil-homepage .embla .surfaced-item-card .surfaced-item-image {
+    max-height: 400px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.mobil-homepage .embla {
+    margin-bottom: 32px;
+}
+
+.mobil-homepage .embla .embla__button {
+    font-size: 32px;
+}
+
+.mobil-homepage .embla__slide.float-content .surfaced-item-card {
+    margin-left: 16px;
+}
+
+.mobil-homepage .accordion__item {
+    background-color: transparent;
+    border-bottom: 3px solid rgba(0, 0, 0, .125);
+}
+
+.mobil-homepage .accordion__item .accordion__item-icon {
+    color: #d6331a;
+    border: 0;
+}
+
+/* @media (max-width: 768px) {
+} */

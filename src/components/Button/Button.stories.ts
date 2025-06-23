@@ -40,12 +40,34 @@ export const Secondary: Story = {
   },
 };
 
-export const Link: Story = {
+export const DefaultLink: Story = {
   args: {
     size: 'large',
     label: 'Link',
     type: 'button',
     href: "#"
+  },
+};
+
+export const LinkWithAngle: Story = {
+  args: {
+    size: 'large',
+    label: 'Link',
+    type: 'button',
+    href: "#",
+    iconType: "angle"
+  },
+};
+
+export const LinkWithoutIcon: Story = {
+  args: {
+    size: 'large',
+    label: 'Link',
+    type: 'button',
+    href: "#",
+    iconType: "no-icon",
+    className: "storybook-button--primary",
+    backgroundColor: "#fff"
   },
 };
 

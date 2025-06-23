@@ -12,3 +12,5 @@ functions/functionMetadata.json
 *.local
 
 .DS_Store
+
+deno.lock

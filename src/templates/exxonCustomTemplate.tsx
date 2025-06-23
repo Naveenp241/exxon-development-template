@@ -7,7 +7,7 @@ import {
     TemplateConfig,
     TemplateProps,
     TemplateRenderProps,
-    TransformProps,
+    // TransformProps,
 } from "@yext/pages";
 import "../index.css";
 import { Header } from "../components/Header/Header";
@@ -15,16 +15,20 @@ import { Footer } from "../components/Footer/Footer";
 import { Hero } from "../components/Hero/Hero";
 import { SurfacedItem } from "../components/SurfacedItem/SurfacedItem";
 import NearByStation from "../components/NearByStations/NearByStation";
+import { HeadingElement } from "../components/HeadingElement/HeadingElement";
+import Paragraph from "../components/Paragraph/Paragraph";
+import { Button } from "../components/Button/Button";
+import Divider from "../components/Divider/Divider";
+import './css/exxonCustomTemplate.css';
 
 /**
  * Required when Knowledge Graph data is used for a template.
  */
 export const config: TemplateConfig = {
     stream: {
-        $id: "exxon-custom-stream",
+        $id: "fuels-stream",
         filter: {
-            entityTypes: ["ce_menuCategory"],
-            // entityIds: ['ce_exxonCustomType']
+            entityTypes: ["ce_exxonCustomType"]
         },
         // Specifies the exact data that each generated document will contain.
         // This data is passed in directly as props to the default exported function.
@@ -34,14 +38,15 @@ export const config: TemplateConfig = {
             "meta",
             "name",
             "slug",
-            "c_menuItems",
-            "c_navitems.id",
-            "c_navitems.name",
-            "c_navitems.slug",
-            "c_childItem.name",
-            "c_childItem.slug",
-            "c_getSubNavItems.name",
-            "c_getSubNavItems.slug",
+            "c_herocmp",
+            "c_surfacedItem",
+            "c_4colSurfacedItem",
+            "c_nearByStation",
+            "c_nearByStationWithContent",
+            "c_stationNearMeInfo",
+            "c_fAQInfoBanner",
+            "c_pageContent",
+            "c_testMegaMenu"
         ],
         localization: {
             locales: ["en"],
@@ -50,7 +55,11 @@ export const config: TemplateConfig = {
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `exxon/${document.slug}`; // or use brand, type, etc.
+    const { slug } = document;
+
+    return slug
+        ? slug
+        : `${document.id.toString()}`;
 };
 
 export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
@@ -83,86 +92,208 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
     };
 };
 
-export interface NavItem {
-    name: string;
-    slug: string;
+interface SurfacedItemData {
+    surfacedItemType: 'card' | 'credit-card';
+    description: string;
+    href: string;
+    imageSrc: {
+        url?: string;
+        alternateText?: string;
+        height?: number;
+        width?: number;
+    };
+    linkLabel: string;
+    title: string;
 }
 
+interface ParagraphProps {
+  content: string;
+  hyperlinkForText?: string;
+  textOfHyperlink?: string;
+  listItems?: string[];
+  ctaText?: string;
+  ctaTextURL?: string;
+  showArrow?: boolean;
+  classname?: string;
+  ariaHidden?: boolean;
+}
+
+interface MenuProps {
+  title: string;
+  path: string;
+  items?: MenuProps[];
+}
+
+const transformMenuData = (data: any[]): MenuProps[] => {
+  return data?.map((level1: any) => ({
+    title: level1.level1Label.label,
+    path: level1.level1Label.addURL,
+    items: level1.sublevel2?.map((level2: any) => ({
+      title: level2.level2Label.label,
+      path: level2.level2Label.addURL,
+      items: level2.sublevel3?.map((level3: any) => ({
+        title: level3.level3Label.label,
+        path: level3.level3Label.addURL,
+      })) || [],
+    })) || [],
+  }));
+};
+
+
 const ExxonCustomTemplate: Template<TemplateRenderProps> = ({
-    relativePrefixToRoot,
+    // relativePrefixToRoot,
     document,
-    __meta,
+    // __meta,
 }) => {
     const {
-        name,
-        c_menuItems,
-        c_navitems,
-        c_childItem,
-        c_getSubNavItems
+        // name,
+        c_herocmp,
+        c_surfacedItem,
+        c_4colSurfacedItem,
+        c_nearByStation,
+        c_nearByStationWithContent,
+        c_stationNearMeInfo,
+        c_fAQInfoBanner,
+        c_pageContent,
+        c_testMegaMenu
     } = document;
 
-    console.log("Navitems:", c_navitems);
-    console.log("Subitems:", c_getSubNavItems);
-    console.log("Child Category:", c_childItem);
+    const menuItems = transformMenuData(c_testMegaMenu);
 
     return (
         <>
             <Header
-                enableMegaMenu = {c_navitems ? true : false}
+                enableMegaMenu
+                navLinks={menuItems}
                 onCreateAccount={() => {}}
                 onLogin={() => {}}
                 onLogout={() => {}}
-                navLinks={c_navitems?.map((item: NavItem) => ({
-                    name: item.name,
-                    slug: `/${item.slug}`,
-                }))}
             />
-            <div className="px-4">
-                <Hero
-                    buttonLink="#"
-                    buttonName="Find a station"
-                    content="Whether you’re looking for premium or regular Mobil™ or Exxon™ gas, diesel fuel or a convenience store, our station finder makes it easy to find a nearby station."
-                    fontColor="dark"
-                    heroType="fuels-hero"
-                    //   backgroundImage={Fuels}
+            <Hero
+                buttonIconType="no-icon"
+                buttonLink={c_herocmp?.cTALink || '#'}
+                buttonName={c_herocmp?.cTALabel || 'Link'}
+                content={c_herocmp?.description}
+                fontColor="light"
+                heroType={c_herocmp?.heroType || 'fuels-hero'}
+                backgroundImage={c_herocmp?.backgroundImage?.url || ''}
+                backgroundGradient={c_herocmp?.backgroundGradient || "linear-gradient(to right, transparent, #000)"}
+            />
+            <div className="px-8 mt-8 w-full">
+                {
+                    c_surfacedItem && 
+                    <div className="mb-8">
+                        <ul className="grid md:grid-cols-2 grid-cols-1 gap-4">
+                            {c_surfacedItem?.map((ele: SurfacedItemData, index: number) => (
+                                <li key={index}>
+                                    <SurfacedItem
+                                        description={ele.description}
+                                        imageSrc={ele.imageSrc?.url || ""}
+                                        href={ele.href}
+                                        linkLabel={ele.linkLabel}
+                                        surfacedItemType={ele.surfacedItemType}
+                                        title={ele.title}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                }
+
+                <Divider
+                    className="my-4"
+                    color="rgba(0, 0, 0, 0.1)"
+                    width={1}
                 />
 
-                <div className="flex justify-around">
-                    {[1, 2, 3, 4].map((_, i) => (
-                        <SurfacedItem
-                        key={i}
-                        description="Members earn 6¢/gallon in points on every Synergy Supreme+™ premium fuel purchase, every day, as a replacement for Premium status."
-                        imageSrc="https://www.exxon.com/-/media/project/wep/exxon/exxon-retail-us/premiumretirement-module/premiumretirement-module-fs-xs.webp"
-                        links={[
-                            {
-                            href: '/en/rewards-program',
-                            label: 'Details'
-                            }
-                        ]}
-                        surfacedItemType="card"
-                        title="Go premium and earn 6¢ in points per gallon"
-                        />
-                    ))}
+                <div className="flex justify-around my-8">
+                    <ul className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+                        {c_4colSurfacedItem?.map((ele: SurfacedItemData, index: number) => (
+                            <li key={index}>
+                                <SurfacedItem
+                                    description={ele.description}
+                                    imageSrc={ele.imageSrc?.url || ""}
+                                    href={ele.href}
+                                    linkLabel={ele.linkLabel}
+                                    surfacedItemType={ele.surfacedItemType}
+                                    title={ele.title}
+                                />
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
-                <div className="px-4">
-                    <NearByStation
-                        accountButtonLink="#"
-                        accountButtonText="Go to accounts"
-                        accountDescription="Log in to your Exxon Mobil FleetPro℠, BusinessPro™ or Smart Card™ account, or check your gift card balance."
-                        accountTitle="Manage your accounts"
-                        faqButtonLink="#"
-                        faqButtonText="View FAQs"
-                        faqDescription="Get answers to your questions on the Exxon Mobil Rewards+ program, our app, products and more."
-                        faqDisclaimer="*For select Exxon Mobil Rewards+ members only. Earn the points (10 points per gallon)..."
-                        faqTitle="Frequently Asked Questions"
-                        heroButtonLink="#"
-                        heroButtonText="Find a station"
-                        heroDescription="Whether you're looking for premium or regular gas, diesel or a convenience store, our station finder makes it easy to find a nearby station."
-                        heroImage="https://corporate.exxonmobil.com/dfsmedia/203ddbf073b24e7dac6f6243dabf7669/149080-50059/options/keepaspectratio/sr-header-02-8192-x-1708-short-banner-2880-x-600"
-                        heroTitle="Find an Exxon<sup>®</sup> or Mobil<sup>®</sup> station near me"
-                    />
+                <NearByStation
+                    accountBgImage={c_nearByStation?.accountBgImage.url}
+                    accountButtonLink=""
+                    accountButtonText=""
+                    accountDescription=""
+                    accountTitle=""
+                    imageLink={c_nearByStation?.imageLink}
+                    variant={c_nearByStation?.variant}
+                />
+
+                <div className="grid grid-cols-12 md:my-8 my-5">
+                    <div className="md:col-span-9 col-span-full">
+                        <HeadingElement elementType="h2" title={c_stationNearMeInfo.title} className="text-3xl mb-2" />
+                        <Paragraph paragraph={c_stationNearMeInfo.description} />
+                    </div>
+                    <div className="md:col-span-3 col-span-6 md:pl-8 md:mt-0 mt-4 pl-0">
+                        <Button
+                            label={c_stationNearMeInfo.cTAName}
+                            backgroundColor="#fff"
+                            className="w-full mb-4 text-base cta-blueBg-white justify-center"
+                            href={c_stationNearMeInfo.cTALink}
+                            iconType="no-icon"
+                            primary
+                            size="large"
+                            type="button"
+                        />
+                    </div>
                 </div>
+
+                <NearByStation
+                    accountBgImage={c_nearByStationWithContent?.accountBgImage.url}
+                    accountButtonLink={c_nearByStationWithContent?.accountButtonLink}
+                    accountButtonText={c_nearByStationWithContent?.accountButtonText}
+                    accountDescription={c_nearByStationWithContent?.accountDescription}
+                    accountTitle={c_nearByStationWithContent?.accountTitle}
+                    imageLink={c_nearByStationWithContent?.imageLink}
+                    variant={c_nearByStationWithContent?.variant}
+                />
+
+                <div className="grid grid-cols-12 md:my-8 my-5">
+                    <div className="md:col-span-9 col-span-full">
+                        <HeadingElement elementType="h2" title={c_fAQInfoBanner?.title} className="text-3xl mb-2" />
+                        <Paragraph paragraph={c_fAQInfoBanner?.description} />
+                    </div>
+                    <div className="md:col-span-3 col-span-6 md:pl-8 md:mt-0 mt-4 pl-0">
+                        <Button
+                            label={c_fAQInfoBanner?.cTAName}
+                            backgroundColor="#fff"
+                            className="w-full mb-4 text-base cta-blueBg-white justify-center"
+                            href={c_fAQInfoBanner?.cTALink}
+                            iconType="no-icon"
+                            primary
+                            size="large"
+                            type="button"
+                        />
+                    </div>
+                </div>
+
+                <div className="page-info mb-16">
+                {
+                    c_pageContent?.map((ele: ParagraphProps, index: number) => (
+                        <Paragraph 
+                            paragraph={ele?.content}  
+                            inlineTextLink={ele?.hyperlinkForText}
+                            inlineTextLinkURL={ele?.textOfHyperlink}
+                            classname="info-text"
+                            key={index}
+                        />
+                    ))
+                }
+                </div>          
             </div>
             <Footer />
         </>

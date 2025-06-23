@@ -1,5 +1,5 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './button.css';
 
 export interface ButtonProps {
@@ -16,9 +16,13 @@ export interface ButtonProps {
   /** define target for an anchor button */
   target?: '_self' | '_blank' | '_parent' | '_top';
   /** Button contents */
-  label: string;
+  label?: string;
   /** Optional classname */
   className?: string;
+  /** Switch icons for anchor */
+  iconType?: 'arrow' | 'angle' | 'no-icon';
+  /** Add children */
+  children?: React.ReactNode;
   /** Optional click handler */
   onClick?: () => void;
 }
@@ -33,15 +37,22 @@ export const Button = ({
   href,
   className,
   target = "_self",
+  iconType = 'arrow',
   ...props
 }: ButtonProps) => {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
 
+  // #d5000a
   return href ? (
-    <a href={href} className={['anchor-btn', 'relative', 'inline-flex items-center', `storybook-button--${size}`, className].join(' ')} role="button" target={target}>
+    <a href={href} className={['anchor-btn', 'relative', 'inline-flex items-center', `storybook-button--${size}`, className, `btn__${iconType}`].join(' ')} role="button" target={target} style={{ color: backgroundColor ?? '#d5000a' }}>
       {label}
-      {/* <FontAwesomeIcon icon={faArrowRight} className={['anchor-btn__arrow', 'text-xs', `storybook-button--${size}`].join(' ')} /> */}
-      <i className={['anchor-btn__arrow', 'text-xs', `storybook-button--${size}`].join(' ')}></i>
+      {
+        iconType === 'arrow' ? 
+          <FontAwesomeIcon icon={faArrowRight} className={['anchor-btn__arrow', 'text-xs', `storybook-button--${size}`].join(' ')} />
+        : iconType === 'angle' ?  
+          <FontAwesomeIcon icon={faChevronRight} className={['anchor-btn__angle', 'text-xs'].join(' ')} />
+          : <></>
+      }
     </a>
   ) : (
     <button
@@ -51,6 +62,7 @@ export const Button = ({
       {...props}
     >
       {label}
+      {props.children}
     </button>
   );
 };

@@ -1,0 +1,23 @@
+.social-media__icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #d1d3d4;
+    border-radius: 50%;
+    margin-right: 14px;
+    color: #939598;
+    font-size: 1.25rem;
+}
+
+.social-media__icon-wrapper:last-child {
+    margin: 0;
+}
+
+.social-media__icon-wrapper:hover {
+    border-color: #333;
+    color: #333;
+}
+
+.social-media__icon-wrapper:focus-visible{
+    outline: 1px solid #000;
+    outline-offset: 4px;
+}

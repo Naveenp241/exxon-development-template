@@ -3,8 +3,8 @@ import Exxon from '../../assets/images/exxon.svg';
 import Mobil from '../../assets/images/mobil.svg';
 import Esso from '../../assets/images/esso.svg';
 import Xto from '../../assets/images/xto-energy.svg';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faGlobe, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import './footer.css';
 
 export interface FooterProps {}
@@ -25,22 +25,22 @@ export const Footer = ({ ...props }: FooterProps) => {
             </ul>
             <div className="footer__location text-sm leading-relaxed mt-1">
               <a href="#" className="hover:underline focus:outline focus:ring" aria-label="Select Location">
-                {/* <FontAwesomeIcon icon={faGlobe} className='mr-2'/> */}
+                <FontAwesomeIcon icon={faGlobe} className='mr-2'/>
                 Select Location
               </a>
             </div>
           </div>
 
-          <div className="footer__search flex items-center mt-4 md:mt-0 relative w-max">
+          <div className="footer__search flex items-center mt-4 md:mt-0 relative w-full">
             <label htmlFor="footer-search" className="sr-only">Search</label>
             <input
               id="footer-search"
-              className="footer__search-input sm:w-100 p-3 md:pl-4 focus:outline"
+              className="footer__search-input sm:w-100 p-3 md:pl-4 focus:outline w-full"
               type="text"
               placeholder="Search"
               aria-label="Search footer"
             />
-            {/* <FontAwesomeIcon icon={faMagnifyingGlass} className='absolute right-4'/> */}
+            <FontAwesomeIcon icon={faMagnifyingGlass} className='absolute right-4'/>
           </div>
         </article>
       </section>

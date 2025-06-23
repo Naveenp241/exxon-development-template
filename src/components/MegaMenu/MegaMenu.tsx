@@ -20,7 +20,7 @@ export const MegaMenu = ({ menuData }: MegaMenuProps) => {
         {menuData?.map((menuItem, index) => (
           <li
             key={menuItem.title}
-            className={`cmp-nav__wrapper ${activeIndex === index ? 'active' : ''}`}
+            className={`cmp-nav__wrapper px-4 py-9 ${activeIndex === index ? 'active' : ''}`}
             onMouseEnter={() => setActiveIndex(index)}
             onMouseLeave={() => setActiveIndex(null)}
             role="menuitem"
@@ -28,7 +28,7 @@ export const MegaMenu = ({ menuData }: MegaMenuProps) => {
           >
             <a 
               href={menuItem.path} 
-              className='cmp-nav__title flex px-4 py-9 text-sm leading-5'
+              className='cmp-nav__title inline text-sm leading-5'
               onKeyUp={(e) => {
                 if (['Enter', ' '].includes(e.key)) {
                   setActiveIndex(index);
@@ -37,7 +37,7 @@ export const MegaMenu = ({ menuData }: MegaMenuProps) => {
                   setActiveIndex(null);
                 }
               }}
-              target='_blank'
+              target='_blank' rel="noreferrer"
             >
               {menuItem.title}
             </a>
@@ -45,12 +45,12 @@ export const MegaMenu = ({ menuData }: MegaMenuProps) => {
               <ul className='cmp-nav__list absolute'>
                 {menuItem.items?.map((subItem) => (
                   <li key={subItem.title} className='mb-4'>
-                    <a className='cmp-nav__sublist-title' href={subItem.path} target='_blank'>{subItem.title}</a>
+                    <a className='cmp-nav__sublist-title' href={subItem.path} target='_blank' rel="noreferrer">{subItem.title}</a>
                     {subItem.items && (
                       <ul className='flex flex-col'>
                         {subItem.items?.map((deepItem) => (
                           <li key={deepItem.title} className='cmp-nav__sublist-item inline-block ml-6 mb-1'>
-                            <a href={deepItem.path} className='text-sm leading-5' target='_blank'>{deepItem.title}</a>
+                            <a href={deepItem.path} className='text-sm leading-5' target='_blank' rel="noreferrer">{deepItem.title}</a>
                           </li>
                         ))}
                       </ul>

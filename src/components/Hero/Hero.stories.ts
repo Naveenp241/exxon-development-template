@@ -26,7 +26,8 @@ export const CorporateHero: Story = {
     subtitle: "Subtitle",
     title: 'Title',
     content: "Content",
-    fontColor: 'dark'
+    fontColor: 'dark',
+    backgroundImage: 'https://picsum.photos/1440'
   },
 };
 
@@ -40,7 +41,8 @@ export const CorporateMain: Story = {
     content: "Content",
     buttonLink: '#',
     buttonName: 'Button',
-    fontColor: 'dark'
+    fontColor: 'dark',
+    backgroundImage: 'https://picsum.photos/1440'
   },
 };
 
@@ -48,9 +50,11 @@ export const FuelsHero: Story = {
   args: {
     heroType: "fuels-hero",
     content: "Content",
+    buttonIconType: "no-icon",
     buttonLink: '#',
     buttonName: 'Button',
-    fontColor: 'dark'
+    fontColor: 'dark',
+    backgroundImage: 'https://picsum.photos/1440'
   },
 };
 

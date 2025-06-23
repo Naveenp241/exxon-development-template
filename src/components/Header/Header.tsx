@@ -1,7 +1,9 @@
 import { Button } from '../Button/Button';
 import ExxonMobile from '../../assets/images/exxon-mobil.svg';
 import { MegaMenu, type MenuProps } from '../MegaMenu/MegaMenu';
+import { Icon } from '../Icon/Icon';
 import './header.css';
+import { useState } from 'react';
 
 type User = {
   name: string;
@@ -10,7 +12,7 @@ type User = {
 export interface HeaderProps {
   user?: User;
   enableMegaMenu?: boolean;
-  navLinks?: { name: string; slug: string }[]; // Passed from page template
+  navLinks?: MenuProps[];
   onLogin?: () => void;
   onLogout?: () => void;
   onCreateAccount?: () => void;
@@ -19,7 +21,7 @@ export interface HeaderProps {
 const fallbackNavLinks: MenuProps[] = [
   {
     title: 'Fuels',
-    path: '#',
+    path: '/fuels',
     items: [
       {
         title: 'Exxon',
@@ -91,45 +93,47 @@ export const Header = ({
   enableMegaMenu,
   navLinks = []
 }: HeaderProps) => {
-  const menuToRender: MenuProps[] = navLinks.length
-    ? navLinks.map(link => ({
-        title: link.name,
-        path: link.slug,
-      }))
-    : fallbackNavLinks;
-  
-  console.log("Dynamic nav items => ", navLinks.map(link => ({
-        title: link.name,
-        path: link.slug,
-      })));
+
+  const menuToRender: MenuProps[] = navLinks?.length ? navLinks : fallbackNavLinks;
+  const [toggleHamburger, setToggleHamburger] = useState(false);
 
   return (
-    <header>
-      <div className={`storybook-header px-11 ${!enableMegaMenu ? 'py-4' : 'cmp-mega-nav'}`}>
-        <a href='/' className='mr-6'>
+    <header className={`cmp-header relative md:px-11 px-4 py-4 ${enableMegaMenu && 'cmp-mega-nav'} ${toggleHamburger ? 'hamburger-active' : ''}`}>
+      
+      <section className='flex md:w-fit w-full'>
+        <a href='/' className='md:mr-6 banner-img'>
           <img src={ExxonMobile} alt="Exxon Mobile" className='mt-1' />
         </a>
-        <div>
-          {user ? (
-            <>
-              <span className="welcome">
-                Welcome, <b>{user.name}</b>!
-              </span>
-              <Button size="small" onClick={onLogout} label="Log out" />
-            </>
-          ) : (
-            <>
-              {!enableMegaMenu ? (
-                <>
-                  <Button size="small" onClick={onLogin} label="Log in" />
-                  <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
-                </>
-              ) : (
-                <MegaMenu menuData={menuToRender} />
-              )}
-            </>
-          )}
-        </div>
+
+        <Button onClick={() => setToggleHamburger(!toggleHamburger)} type="button" className='cmp-header__hamburger'>
+          { 
+            toggleHamburger ?
+              <Icon icon="faXmark" />
+            : <Icon icon="faBars" />
+          }
+        </Button>
+      </section>
+
+      <div className={`cmp-header__wrapper flex ${toggleHamburger ? 'cmp-header__wrapper--mobile' : ''}`}>
+        {user ? (
+          <>
+            <span className="welcome">
+              Welcome, <b>{user.name}</b>!
+            </span>
+            <Button size="small" onClick={onLogout} label="Log out" />
+          </>
+        ) : (
+          <>
+            {!enableMegaMenu ? (
+              <>
+                <Button size="small" onClick={onLogin} label="Log in" />
+                <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
+              </>
+            ) : (
+              <MegaMenu menuData={menuToRender} />
+            )}
+          </>
+        )}
       </div>
     </header>
   );

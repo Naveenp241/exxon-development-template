@@ -1,0 +1,39 @@
+.paragraph-block {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.paragraph-block__text {
+  margin-bottom: 0.625rem;
+}
+
+.paragraph-block__list {
+  list-style-type: disc;       
+  padding-left: 2.5rem;  
+  margin-bottom: 1rem;
+}
+
+.paragraph-block__list-item::marker {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.paragraph-block__inline-link {
+  color: #0C479D;
+  text-decoration: underline;
+}
+
+.paragraph-block__inline-link:hover {
+  cursor: pointer;
+}
+
+.paragraph-block .anchor-btn .anchor-btn__angle {
+  margin-top: 2.5px;
+}
+
+.paragraph-block__link {
+  color: #0C479D;
+}
+
+.paragraph-block__link:hover {
+  text-decoration: underline;
+}

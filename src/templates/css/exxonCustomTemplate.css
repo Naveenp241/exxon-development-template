@@ -1,0 +1,17 @@
+.cta-blueBg-white {
+    padding: 10px 50px;
+    text-align: center;
+    background-color: #0e469b;
+    color: #fff
+}
+
+.cta-blueBg-white:hover {
+    background-color: #3474d9;
+}
+
+.info-text {
+    font-size: 13px;
+    line-height: 22px;
+    color: #2b2626;
+    margin-bottom: 10px;
+}

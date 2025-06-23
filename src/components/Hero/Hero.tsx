@@ -1,5 +1,4 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Button } from '../Button/Button';
 import './hero.css';
 
 export interface HeroProps {
@@ -13,9 +12,11 @@ export interface HeroProps {
   content?: string;
   fontColor?: 'light' | 'dark';
   href?: string;
+  buttonIconType?: "no-icon" | "arrow" | "angle";
   buttonLink?: string;
   buttonName?: string;
   backgroundGradient?: string;
+  alt?: string;
 }
 
 const HeroCard = ({
@@ -27,9 +28,11 @@ const HeroCard = ({
   content,
   backgroundImage,
   fontColor = 'dark',
+  buttonIconType = 'arrow',
   buttonLink = '#',
   buttonName = 'Learn more',
-  backgroundGradient
+  backgroundGradient,
+  alt,
 }: Omit<HeroProps, 'enableClick'>) => {
   const textColor = fontColor === 'light' ? 'text-white' : 'text-gray-900';
 
@@ -39,19 +42,23 @@ const HeroCard = ({
       style={{ 
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined
       }}
-        aria-label={title || 'Hero section'}
-      >
+      aria-label={title || 'Hero section'}
+    >
+      <div className='cmp-hero--mobile-img md:hidden block'>
+        <img src={backgroundImage} alt={alt} />
+      </div>
+
       {
         backgroundGradient && 
-        <div 
-          className="cmp-hero__overlay absolute w-full h-full z-1" 
-          style={{background: backgroundGradient ? backgroundGradient : undefined}}
-          aria-hidden="true"
-          role="presentation"
-        ></div>
+          <div 
+            className="cmp-hero__overlay absolute w-full h-full z-1" 
+            style={{background: backgroundGradient ? backgroundGradient : undefined}}
+            aria-hidden="true"
+            role="presentation"
+          ></div>
       }
       
-      <article className="max-w-4xl cmp-hero__content p-4 z-2">
+      <article className="cmp-hero__content p-4 z-2">
         {
           heroType === 'corporate-hero' ? 
           <header>
@@ -78,16 +85,32 @@ const HeroCard = ({
 
               <p className={`cmp-hero__subtext text-base leading-normal mt-4 ${textColor}`}>{content}</p>
               <div className="cmp-hero__cta">
-                <a className='inline-block text-sm font-bold px-4 py-2' href={buttonLink} aria-label={buttonName}>
-                  {buttonName}
-                  {/* <FontAwesomeIcon icon={faArrowRight} className='text-xs pl-4' /> */}
-                </a>
+                <Button
+                  href={buttonLink}
+                  label={buttonName}
+                  onClick={() => {}}
+                  size="large"
+                  type="button"
+                  iconType={buttonIconType}
+                  className='inline-block text-sm font-bold'
+                  aria-label={buttonName}
+                  backgroundColor='#fff'
+                />
               </div>
           </div> 
           : <div>
-              <p className={`cmp-hero__subtext text-sm leading-normal mt-4 ${textColor}`}>{content}</p>
+              <p className={`cmp-hero__subtext leading-normal mt-4 ${textColor}`}>{content}</p>
               <div className="cmp-hero__cta">
-                <a className='inline-block text-sm px-6 py-2' href={buttonLink} aria-label={buttonName}>{buttonName}</a>
+                <Button
+                  href={buttonLink}
+                  label={buttonName}
+                  onClick={() => {}}
+                  size="large"
+                  type="button"
+                  iconType={buttonIconType}
+                  aria-label={buttonName}
+                  backgroundColor='#fff'
+                />
               </div>
           </div>
         }
@@ -106,6 +129,8 @@ export const Hero = ({
       <HeroCard {...props} />
     </a>
   ) : (
-    <HeroCard {...props} />
+    <div className="cmp-hero-wrapper">
+      <HeroCard {...props} />
+    </div>
   )
 );

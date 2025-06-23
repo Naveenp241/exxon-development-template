@@ -1,17 +1,15 @@
-.cmp-nav__title {
+.cmp-nav__wrapper {
     border-top: 4px solid transparent;
-    padding-top: 32px;
-    padding-bottom: 36px;
 }
 
-.cmp-nav__title:focus-visible,
-.cmp-nav__title:hover {
+.cmp-nav__wrapper:has(.cmp-nav__title:focus-visible),
+.cmp-nav__wrapper:hover {
     border-top: 4px solid #fe000c
 }
 
 .cmp-nav__list {
-    max-width: 332px;
-    width: 100%;
+    width: max-content;
+    min-width: 300px;
     display: none;
     padding: 40px 23px;
     border: 1px solid #d1d3d4;
@@ -21,11 +19,21 @@
 
 .cmp-nav__wrapper.active .cmp-nav__list {
     display: block;
+    top: 100px;
+}
+
+.cmp-nav__list:empty,
+.cmp-nav__wrapper.active .cmp-nav__list:empty {
+    padding: 0;
+    margin: 0;
+}
+
+.cmp-nav__wrapper.active {
+    border-top: 4px solid #fe000c;
 }
 
 .cmp-nav__wrapper.active .cmp-nav__title {
     color: #fe000c;
-    border-top: 4px solid #fe000c;
 }
 
 .cmp-nav__sublist-title {
@@ -33,7 +41,6 @@
     line-height: 24px;
     margin-bottom: 10px;
     font-weight: 700;
-    /* transition: all .5s ease; */
 }
 
 .cmp-nav__sublist-title:hover {
@@ -43,4 +50,25 @@
 .cmp-nav__sublist-item:hover a {
     text-decoration: underline;
     text-underline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    .cmp-nav__wrapper {
+        border-top: 1px solid transparent;
+    }
+
+    .cmp-nav__wrapper.active {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .cmp-nav__wrapper.active .cmp-nav__list {
+        top: 16px;
+        position: relative;
+        width: 100%;
+    }
+
+    .cmp-nav__wrapper:has(.cmp-nav__title:focus-visible),
+    .cmp-nav__wrapper:hover {
+        border-top: 1px solid rgba(0, 0, 0, 0.1)
+    }
 }

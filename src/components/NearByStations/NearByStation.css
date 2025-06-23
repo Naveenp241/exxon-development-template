@@ -1,59 +1,46 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #fff;
-  color: #333;
-}
-
-.near-by-station-section {
-  padding: 40px 20px;
+.nearByStationInfo__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
-.near-by-station-section-container {
-    display: flex;
-    justify-content: space-between;
-    text-align: left;
+.nearByStationInfo__wrapper .cmp-hero {
+  width: 100%;
+  max-width: unset;
+  display: flex;
+  align-items: center;
+}
+.nearByStationInfo__wrapper .cmp-hero .cmp-hero__content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: unset;
 }
 
-.near-by-station-section_hero {
-  background: #f9f9f9;
+.nearByStationInfo__wrapper.mobilVariant .cmp-hero{
+  max-height: unset;
+  height: 100%;
+  align-items: end;
 }
 
-.near-by-station-section_hero img {
-  max-width: 100%;
-  height: auto;
+.nearByStationInfo__wrapper.mobilVariant .cmp-hero-wrapper,
+.nearByStationInfo__wrapper.nearByStationInfo .cmp-hero-wrapper {
+  width: 100%;
 }
 
-.btn {
-  display: inline-block;
-  background-color: #005eb8;
-  color: white;
-  padding: 12px 24px;
-  margin-top: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
+.cmp-findAStation .cmp-hero {
+  min-height: 400px;
 }
 
-.near-by-station-section_accounts {
-  background-image: url("https://corporate.exxonmobil.com/dfsmedia/203ddbf073b24e7dac6f6243dabf7669/149080-50059/options/keepaspectratio/sr-header-02-8192-x-1708-short-banner-2880-x-600");
-  background-color: #222;
-  color: white;
-  padding: 40px 20px;
+@media (max-width: 768px) {
+  .cmp-findAStation .cmp-hero {
+    min-height: unset;
+  }
+  
+  .cmp-findAStation .cmp-hero__content {
+    padding: 0;
+  }
 }
-
-.near-by-station-section_accounts .btn {
-  background-color: #007bff;
-}
-
-.near-by-station-section_faq {
-  background-color: #f4f4f4;
-  padding: 40px 20px;
-  text-align: left;
-}
-.disclaimer {
-  font-size: 11px;
-  color: #666;
-  margin-top: 20px;
-}
- 

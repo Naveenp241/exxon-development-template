@@ -1,0 +1,27 @@
+/* .divider-wrapper hr.cmp-divider {
+  border-top-color: #0e469b;
+} */
+
+.topic-container-wrapper .topic-container {
+  min-height: unset;
+}
+
+.topic-container-wrapper .topic-container .topic-container--media img {
+  object-fit: contain;
+}
+
+.topic-container-wrapper .topic-container__media-content {
+  padding: 0;
+}
+
+.topic-container-wrapper .topic-container--content {
+    justify-content: flex-start;
+}
+
+.topic-container-wrapper .topic-container {
+    gap: 2rem;
+}
+
+.topic-container-wrapper .topic-container__media-content {
+    max-width: unset;
+}
