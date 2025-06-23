@@ -1,0 +1,46 @@
+.nearByStationInfo__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.nearByStationInfo__wrapper .cmp-hero {
+  width: 100%;
+  max-width: unset;
+  display: flex;
+  align-items: center;
+}
+.nearByStationInfo__wrapper .cmp-hero .cmp-hero__content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: unset;
+}
+
+.nearByStationInfo__wrapper.mobilVariant .cmp-hero{
+  max-height: unset;
+  height: 100%;
+  align-items: end;
+}
+
+.nearByStationInfo__wrapper.mobilVariant .cmp-hero-wrapper,
+.nearByStationInfo__wrapper.nearByStationInfo .cmp-hero-wrapper {
+  width: 100%;
+}
+
+.cmp-findAStation .cmp-hero {
+  min-height: 400px;
+}
+
+@media (max-width: 768px) {
+  .cmp-findAStation .cmp-hero {
+    min-height: unset;
+  }
+  
+  .cmp-findAStation .cmp-hero__content {
+    padding: 0;
+  }
+}

@@ -1,0 +1,199 @@
+
+
+/* Base styles for the carousel wrapper */
+.embla {
+  --slide-spacing: 1rem; /* Space between slides */
+  --slide-size: 100%; /* Default slide width (mobile: 100%) */
+  --slide-height: 19rem; /* Fixed height for demo content */
+
+  position: relative;
+  max-width: 90rem; /* Max width of the entire carousel container */
+  margin-inline: auto;
+}
+
+/* Viewport for Embla - hides overflow */
+.embla__viewport {
+  overflow: hidden;
+}
+
+/* Container for all slides - uses flexbox */
+.embla__container {
+  backface-visibility: hidden; /* Prevent flickering */
+  display: flex;
+  touch-action: pan-y; /* Allow vertical pan, disable horizontal default */
+  margin-left: calc(var(--slide-spacing) * -1); /* Counteract slide left margin */
+}
+
+/* Individual slide item */
+.embla__slide {
+  flex: 0 0 var(--slide-size); /* Don't grow, don't shrink, base size */
+  min-width: 0; /* Allow content to shrink */
+  padding-left: var(--slide-spacing); /* Space on the left of each slide */
+}
+
+.embla__slide .surfaced-item-card {
+  max-width: unset;
+  margin: 0;
+}
+
+.embla__dots--v1 .embla__dots{
+  margin: 0;
+}
+
+.embla__dots--v2 .embla__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.embla__dots--v2 .embla__dots .embla__dot::after{
+  width: 100%;
+  border-radius: unset;
+  margin-right: 8px;
+  height: 3px;
+}
+
+.embla__dots--v2 .embla__controls .embla__button--next{
+  margin-left: 16px;
+}
+
+/* Content wrapper within each slide (for demo purposes) */
+.embla__slide__number {
+  border-radius: 1.8rem;
+  font-weight: 900;
+  white-space: nowrap;
+  background-color: var(--color-gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--slide-height);
+  font-size: 3rem;
+  color: var(--color-gray-900);
+}
+
+/* Navigation buttons */
+.embla__controls {
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* Left button, spacer, right button */
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-top: 1.8rem;
+}
+
+.embla__button {
+  -webkit-appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.embla__button {
+  width: 2.6rem;
+  height: 2.6rem;
+  z-index: 1;
+  border-radius: 50%;
+  /* background-color: var(--color-gray-300); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.embla__button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Dots (indicators) */
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-right: calc(var(--slide-spacing) * -1);
+  margin-top: 1.8rem;
+}
+
+.embla__dot {
+  -webkit-appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 2rem; /* Dot size */
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.embla__dot::after {
+  background-color: #919191; /* Inactive dot color */
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  content: '';
+}
+
+.embla__dot--selected::after {
+  background-color: #0376A9; /* Active dot color */
+}
+
+.embla__slide .surfaced-item-card:hover {
+  box-shadow: unset;
+}
+
+.embla__slide.float-content .surfaced-item-card {
+  position: relative;
+}
+
+.embla__slide.float-content .surfaced-item-content {
+  position: absolute;
+  background: #fff;
+  max-width: 520px;
+  padding: 20px;
+  top: 32px;
+  left: 32px;
+}
+
+.embla__controls.float-content,
+.embla__dots.float-content {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .embla__slide.float-content .surfaced-item-content {
+    position: unset;
+    max-width: unset;
+    padding: unset;
+  }
+}
+
+/* === RESPONSIVE STYLES === */
+
+/* Tablet view: 3 slides */
+@media (min-width: 768px) { /* Adjust breakpoint as needed for "tablet" */
+  .embla {
+    --slide-size: calc(100% / 3); /* 3 slides visible */
+  }
+}
+
+/* Desktop view: 3 slides (or more specific if needed) */
+@media (min-width: 1024px) { /* Adjust breakpoint as needed for "desktop" */
+  .embla {
+    --slide-size: calc(100% / 3); /* Still 3 slides visible */
+  }
+
+}

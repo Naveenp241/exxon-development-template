@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.centered-container {
+  @apply mx-auto px-5 md:px-14 max-w-screen-xl mt-8 mb-16;
+}
+
+.section {
+  @apply mt-8 mb-16;
+}
+
+.test-box {
+  @apply bg-red-500 text-white p-4 rounded;
+}
+.custom-numbered-marker {
+  background-image: url('https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png');
+  background-size: cover;
+  width: 25px;
+  height: 41px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.custom-numbered-marker span {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 4px;
+  text-shadow: 0 0 2px rgba(0,0,0,0.8);
+  line-height: 1;
+}
+
+.width-540  {
+  width: 540px;
+}
