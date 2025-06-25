@@ -1,0 +1,9 @@
+.fuelCard-wrapper .fuels-card {
+  max-width: unset;
+  border: none;
+}
+
+.fuelCard-wrapper .fuels-card__title {
+  font-size: 30px;
+  font-weight: 100;
+}
