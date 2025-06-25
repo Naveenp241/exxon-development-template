@@ -7,7 +7,6 @@ import {
   TemplateConfig,
   TemplateProps,
   TemplateRenderProps,
-  // TransformProps,
 } from "@yext/pages";
 import "../index.css";
 import { Header } from "../components/Header/Header";
@@ -34,6 +33,7 @@ export const config: TemplateConfig = {
       "meta",
       "name",
       "slug",
+      "description", // ✅ Included to prevent undefined error
       "c_headingElement",
       "c_fuelCard",
       "c_surfacedItem",
@@ -45,20 +45,18 @@ export const config: TemplateConfig = {
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  const { slug } = document;
-
-  return slug ? slug : `${document.id.toString()}`;
+  return document.slug ?? `${document.id}`;
 };
 
 export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
-  return [`index-old/${document.locale}/${document.id.toString()}`];
+  return [`index-old/${document.locale}/${document.id}`];
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
 }): HeadConfig => {
   return {
-    title: document.name,
+    title: document.name ?? "Lubricants HomePage",
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
@@ -66,7 +64,8 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "meta",
         attributes: {
           name: "description",
-          content: document.description,
+          content: document.description ??
+          "Explore Exxon stations, fuel services, and nearby locations.",
         },
       },
       {
@@ -110,19 +109,12 @@ interface SurfacedItemData {
   title: string;
 }
 
-const ExxonCustomTemplate: Template<TemplateRenderProps> = ({
-  // relativePrefixToRoot,
-  document,
-  // __meta,
-}) => {
+const LubesHomePageTemplate: Template<TemplateRenderProps> = ({ document }) => {
   const {
-    // slug,
     c_headingElement,
     c_fuelCard,
     c_surfacedItem,
   } = document;
-
-  console.log(c_headingElement, c_fuelCard, c_surfacedItem);
 
   return (
     <>
@@ -172,7 +164,7 @@ const ExxonCustomTemplate: Template<TemplateRenderProps> = ({
                     href={ele.href}
                     linkLabel={ele.linkLabel}
                     surfacedItemType={ele.surfacedItemType}
-                    title={ele.title}
+                    title={ele.title ?? "Untitled"}
                   />
                 </li>
               ))}
@@ -186,4 +178,4 @@ const ExxonCustomTemplate: Template<TemplateRenderProps> = ({
   );
 };
 
-export default ExxonCustomTemplate;
+export default LubesHomePageTemplate;
