@@ -16,7 +16,7 @@ import {
 function createNumberedIcon(number: number) {
   return L.divIcon({
     html: `
-      <div class="custom-numbered-marker">
+      <div className="custom-numbered-marker">
         <span>${number}</span>
       </div>
     `,

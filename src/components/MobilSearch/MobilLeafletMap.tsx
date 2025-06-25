@@ -80,8 +80,8 @@ const MobilLeafletMap = () => {
     ]);
 
     searchActions.setUserLocation({
-      latitude: 44.8138092,
-      longitude: -68.8045398,
+      latitude: 29.461122847348097,
+      longitude: -96.3391117109375,
     });
 
     searchActions.setQuery(""); // optional
@@ -168,16 +168,26 @@ const MobilLeafletMap = () => {
                 {r.rawData.address?.city}, {r.rawData.address?.region}{" "}
                 {r.rawData.address?.postalCode}
               </div>
-              <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                  `${r.rawData.address?.line1}, ${r.rawData.address?.city}`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-blue-700 text-white text-sm px-3 py-1 rounded hover:bg-blue-800"
-              >
-                Get Directions
-              </a>
+              <div className="grid grid-cols-[140px_140px] gap-4">
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                    `${r.rawData.address?.line1}, ${r.rawData.address?.city}`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-blue-700 text-white text-sm px-3 py-2 rounded hover:bg-blue-800"
+                >
+                  Get Directions
+                </a>
+                <a
+                  href={`https://locations.exxon.com/${r.rawData.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-blue-700 text-white text-sm px-3 py-2 rounded hover:bg-blue-800"
+                >
+                  Visit Station
+                </a>
+              </div>
               <div className="mt-2 text-xs text-gray-600">
                 Station Top Features: 24 Hour Pay at the Pump
               </div>
