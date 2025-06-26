@@ -35,5 +35,6 @@
     border: 0;
 }
 
-/* @media (max-width: 768px) {
-} */
+.mobil-homepage .surfaced-item-link:empty {
+    display: none;
+}

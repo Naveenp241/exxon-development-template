@@ -45,9 +45,14 @@ type ExternalImageData = TemplateProps & { externalImage: ExternalImage };
  * If the page is truly static this function is not necessary.
  */
 
-if (typeof fetch === "undefined") {
-  globalThis.fetch = require("node-fetch");
+// if (typeof fetch === "undefined") {
+//   globalThis.fetch = require("node-fetch");
+// }
+
+if (typeof globalThis.fetch === 'undefined') {
+  globalThis.fetch = fetch as unknown as typeof globalThis.fetch;
 }
+
 
 export const transformProps: TransformProps<ExternalImageData> = async (
   data

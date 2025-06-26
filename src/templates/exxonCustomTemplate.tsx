@@ -158,19 +158,24 @@ const ExxonCustomTemplate: Template<TemplateRenderProps> = ({ document }) => {
         onLogout={() => {}}
       />
 
-      <Hero
-        buttonIconType="no-icon"
-        buttonLink={c_herocmp?.cTALink ?? "#"}
-        buttonName={c_herocmp?.cTALabel ?? "Explore"}
-        content={c_herocmp?.description}
-        fontColor="light"
-        heroType={c_herocmp?.heroType ?? "fuels-hero"}
-        backgroundImage={c_herocmp?.backgroundImage?.url ?? ""}
-        backgroundGradient={
-          c_herocmp?.backgroundGradient ??
-          "linear-gradient(to right, transparent, #000)"
-        }
-      />
+      <div className={(!c_herocmp.subtitle && !c_herocmp.description) ? 'hero-title--align' : ''}>
+        <Hero
+          heroType={c_herocmp?.heroType ?? "fuels-hero"}
+          backgroundImage={c_herocmp?.backgroundImage?.url ?? ""}
+          subtitle={c_herocmp?.subtitle}
+          enableSubtitle={c_herocmp?.subtitle ? true : false}
+          title={c_herocmp?.title}
+          content={c_herocmp?.description}
+          fontColor="light"
+          buttonIconType="no-icon"
+          buttonLink={c_herocmp?.cTALink ?? "#"}
+          buttonName={c_herocmp?.cTALabel ?? "Explore"}
+          backgroundGradient={
+            c_herocmp?.backgroundGradient ??
+            "linear-gradient(to right, transparent, #000)"
+          }
+        />
+      </div>
 
       <div className="px-8 mt-8 w-full">
         {/* Surfaced Items */}
@@ -195,7 +200,16 @@ const ExxonCustomTemplate: Template<TemplateRenderProps> = ({ document }) => {
 
         {/* 4 Column Surfaced Items */}
         {c_4colSurfacedItem && (
-          <ul className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 my-8">
+          <ul
+            className={`
+              grid gap-4 my-8
+              ${c_4colSurfacedItem?.length >= 4 ? 'xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1' :
+                c_4colSurfacedItem?.length === 3 ? 'xl:grid-cols-3 md:grid-cols-2 grid-cols-1' :
+                c_4colSurfacedItem?.length === 2 ? 'md:grid-cols-2 grid-cols-1' :
+                'grid-cols-1'
+              }
+            `}
+          >
             {c_4colSurfacedItem.map((ele: SurfacedItemData, i: number) => (
               <li key={i}>
                 <SurfacedItem
@@ -212,87 +226,102 @@ const ExxonCustomTemplate: Template<TemplateRenderProps> = ({ document }) => {
         )}
 
         {/* Nearby Station */}
-        <NearByStation
-          accountBgImage={c_nearByStation?.accountBgImage?.url}
-          accountButtonLink=""
-          accountButtonText=""
-          accountDescription=""
-          accountTitle=""
-          imageLink={c_nearByStation?.imageLink}
-          variant={c_nearByStation?.variant}
-        />
+        {
+          c_nearByStation && 
+          <NearByStation
+            accountBgImage={c_nearByStation?.accountBgImage?.url}
+            accountButtonLink=""
+            accountButtonText=""
+            accountDescription=""
+            accountTitle=""
+            imageLink={c_nearByStation?.imageLink}
+            variant={c_nearByStation?.variant}
+          />
+        }
 
         {/* Station Info Banner */}
-        <div className="grid grid-cols-12 my-8">
-          <div className="md:col-span-9 col-span-full">
-            <HeadingElement
-              elementType="h2"
-              title={c_stationNearMeInfo?.title ?? "Gas Stations Near Me"}
-              className="text-3xl mb-2"
-            />
-            <Paragraph paragraph={c_stationNearMeInfo?.description} />
+        {
+          c_stationNearMeInfo && 
+          <div className="grid grid-cols-12 my-8">
+            <div className="md:col-span-9 col-span-full">
+              <HeadingElement
+                elementType="h2"
+                title={c_stationNearMeInfo?.title ?? "Gas Stations Near Me"}
+                className="text-3xl mb-2"
+              />
+              <Paragraph paragraph={c_stationNearMeInfo?.description} />
+            </div>
+            <div className="md:col-span-3 col-span-6 md:pl-8 mt-4 md:mt-0">
+              <Button
+                label={c_stationNearMeInfo?.cTAName ?? "Learn More"}
+                backgroundColor="#fff"
+                className="w-full mb-4 text-base cta-blueBg-white justify-center"
+                href={c_stationNearMeInfo?.cTALink ?? "#"}
+                iconType="no-icon"
+                primary
+                size="large"
+                type="button"
+              />
+            </div>
           </div>
-          <div className="md:col-span-3 col-span-6 md:pl-8 mt-4 md:mt-0">
-            <Button
-              label={c_stationNearMeInfo?.cTAName ?? "Learn More"}
-              backgroundColor="#fff"
-              className="w-full mb-4 text-base cta-blueBg-white justify-center"
-              href={c_stationNearMeInfo?.cTALink ?? "#"}
-              iconType="no-icon"
-              primary
-              size="large"
-              type="button"
-            />
-          </div>
-        </div>
+        }
 
         {/* Second Nearby Station Component */}
-        <NearByStation
-          accountBgImage={c_nearByStationWithContent?.accountBgImage?.url}
-          accountButtonLink={c_nearByStationWithContent?.accountButtonLink}
-          accountButtonText={c_nearByStationWithContent?.accountButtonText}
-          accountDescription={c_nearByStationWithContent?.accountDescription}
-          accountTitle={c_nearByStationWithContent?.accountTitle}
-          imageLink={c_nearByStationWithContent?.imageLink}
-          variant={c_nearByStationWithContent?.variant}
-        />
+        {
+          c_nearByStationWithContent &&
+          <NearByStation
+            accountBgImage={c_nearByStationWithContent?.accountBgImage?.url}
+            accountButtonLink={c_nearByStationWithContent?.accountButtonLink}
+            accountButtonText={c_nearByStationWithContent?.accountButtonText}
+            accountDescription={c_nearByStationWithContent?.accountDescription}
+            accountTitle={c_nearByStationWithContent?.accountTitle}
+            imageLink={c_nearByStationWithContent?.imageLink}
+            variant={c_nearByStationWithContent?.variant}
+          />
+        }
 
         {/* FAQ Info Banner */}
-        <div className="grid grid-cols-12 my-8">
-          <div className="md:col-span-9 col-span-full">
-            <HeadingElement
-              elementType="h2"
-              title={c_fAQInfoBanner?.title ?? "FAQs"}
-              className="text-3xl mb-2"
-            />
-            <Paragraph paragraph={c_fAQInfoBanner?.description} />
+        {
+          c_fAQInfoBanner && 
+          <div className="grid grid-cols-12 my-8">
+            <div className="md:col-span-9 col-span-full">
+              <HeadingElement
+                elementType="h2"
+                title={c_fAQInfoBanner?.title ?? "FAQs"}
+                className="text-3xl mb-2"
+              />
+              <Paragraph paragraph={c_fAQInfoBanner?.description} />
+            </div>
+            <div className="md:col-span-3 col-span-6 md:pl-8 mt-4 md:mt-0">
+              <Button
+                label={c_fAQInfoBanner?.cTAName ?? "Read More"}
+                backgroundColor="#fff"
+                className="w-full mb-4 text-base cta-blueBg-white justify-center"
+                href={c_fAQInfoBanner?.cTALink ?? "#"}
+                iconType="no-icon"
+                primary
+                size="large"
+                type="button"
+              />
+            </div>
           </div>
-          <div className="md:col-span-3 col-span-6 md:pl-8 mt-4 md:mt-0">
-            <Button
-              label={c_fAQInfoBanner?.cTAName ?? "Read More"}
-              backgroundColor="#fff"
-              className="w-full mb-4 text-base cta-blueBg-white justify-center"
-              href={c_fAQInfoBanner?.cTALink ?? "#"}
-              iconType="no-icon"
-              primary
-              size="large"
-              type="button"
-            />
-          </div>
-        </div>
+        }
 
         {/* Page Content Paragraphs */}
-        <div className="page-info mb-16">
-          {c_pageContent?.map((ele: ParagraphProps, index: number) => (
-            <Paragraph
-              key={index}
-              paragraph={ele?.content}
-              inlineTextLink={ele?.hyperlinkForText}
-              inlineTextLinkURL={ele?.textOfHyperlink}
-              classname="info-text"
-            />
-          ))}
-        </div>
+        {
+          c_pageContent && 
+          <div className="page-info mb-16">
+            {c_pageContent?.map((ele: ParagraphProps, index: number) => (
+              <Paragraph
+                key={index}
+                paragraph={ele?.content}
+                inlineTextLink={ele?.hyperlinkForText}
+                inlineTextLinkURL={ele?.textOfHyperlink}
+                classname="info-text"
+              />
+            ))}
+          </div>
+        }
       </div>
 
       <Footer />
