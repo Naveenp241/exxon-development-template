@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import StationSearchBar from "./StationSearchBar";
+import ToggleSwitch from "../ToggleSwitch";
 import {
   MapContainer,
   TileLayer,
@@ -64,6 +65,7 @@ const MobilLeafletMap = () => {
   const [center, setCenter] = useState<[number, number]>([37.7749, -122.4194]); // Default to SF
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const mapRef = useRef<L.Map | null>(null);
+  const [brandType, setBrandType] = useState<"Mobil" | "Exxon">("Mobil");
 
   // Initial query: filter for Mobil stations + user location
   useEffect(() => {
@@ -107,6 +109,23 @@ const MobilLeafletMap = () => {
       }
     }
   }, [selectedIndex, results]);
+  const handleToggle = (isOn) => {
+    console.log("Switch is now:", isOn);
+    // You can update a filter or sort setting here if needed
+    setBrandType(isOn ? "Exxon" : "Mobil");
+    searchActions.setStaticFilters([
+      {
+        filter: {
+          fieldId: "name",
+          matcher: Matcher.Equals,
+          value: isOn ? "Exxon" : "Mobil",
+          kind: "fieldValue",
+        },
+        selected: true,
+      },
+    ]);
+    searchActions.executeVerticalQuery();
+  };
 
   return (
     <div className="relative h-screen w-full">
@@ -147,8 +166,9 @@ const MobilLeafletMap = () => {
       <div className="absolute top-4 left-4 bg-white shadow-lg z-10 w-[540px] max-h-[560px] overflow-y-auto rounded-md">
         <StationSearchBar />
         <div className="p-4 space-y-3">
-          <div className="text-sm">
-            Showing {results?.length || 0} stations near you
+          <div className="text-sm grid grid-cols-2 gap-4 content-center">
+            <div>Showing {results?.length || 0} stations near you</div>
+            <ToggleSwitch label={`Search By Brand: ${brandType}`} onToggle={handleToggle} />
           </div>
           {results?.map((r, i) => (
             <div
