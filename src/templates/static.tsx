@@ -1,7 +1,7 @@
 /**
  * This is an example of how to create a static template that uses getStaticProps to retrieve data.
  */
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 import "../index.css";
 import {
   Template,
@@ -49,10 +49,15 @@ type ExternalImageData = TemplateProps & { externalImage: ExternalImage };
 //   globalThis.fetch = require("node-fetch");
 // }
 
-if (typeof globalThis.fetch === 'undefined') {
-  globalThis.fetch = fetch as unknown as typeof globalThis.fetch;
-}
+// if (typeof globalThis.fetch === 'undefined') {
+//   globalThis.fetch = fetch as unknown as typeof globalThis.fetch;
+// }
 
+// export const transformProps: TransformProps<ExternalImageData> = async (data) => {
+//   const url = `https://jsonplaceholder.typicode.com/photos/2`;
+//   const externalImage = await fetch(url).then((res) => res.json());
+//   return { ...data, externalImage };
+// };
 
 export const transformProps: TransformProps<ExternalImageData> = async (
   data
