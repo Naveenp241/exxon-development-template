@@ -15,3 +15,18 @@
     color: #2b2626;
     margin-bottom: 10px;
 }
+
+.hero-title--align .cmp-hero-wrapper .cmp-hero__content {
+    margin: auto;
+}
+.hero-title--align .cmp-hero-wrapper .cmp-hero__content .cmp-hero__cta {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-title--align .cmp-hero__cta a{
+    background-color: #0e469b
+}
+.hero-title--align .cmp-hero__cta a:hover {
+    background-color: #0a58ca;
+}
