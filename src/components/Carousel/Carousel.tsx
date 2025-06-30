@@ -18,16 +18,18 @@ type Slide = {
   description?: string;
   label?: string; 
   href?: string;
+  indicatorContent?: string;
 };
 interface EmblaCarouselProps {
   slides?: Slide[];
   options?: EmblaOptionsType;
   slidesToShow?: number;
-  dotsVariant?: 'v1' | 'v2';
+  dotsVariant?: 'v1' | 'v2' | 'v3';
   floatContent?: boolean;
+  enableIndicatorContent?: boolean;
 }
 
-const Carousel: React.FC<EmblaCarouselProps> = ({ slides, options, slidesToShow, dotsVariant, floatContent = false }) => {
+const Carousel: React.FC<EmblaCarouselProps> = ({ slides, options, slidesToShow, dotsVariant, floatContent = false, enableIndicatorContent=false }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
@@ -112,7 +114,7 @@ const Carousel: React.FC<EmblaCarouselProps> = ({ slides, options, slidesToShow,
               </button>
             </div>
           </div>
-        : <div className={`embla__dots--${dotsVariant}`}>
+        : dotsVariant === "v2" ? <div className={`embla__dots--${dotsVariant}`}>
             <div className="embla__controls px-4">
               <button className="embla__button embla__button--prev" onClick={scrollPrev} disabled={prevBtnDisabled}>
                 &#10094; {/* Left arrow */}
@@ -149,9 +151,41 @@ const Carousel: React.FC<EmblaCarouselProps> = ({ slides, options, slidesToShow,
               ))}
             </div>
           </div>
-      }
+        : <div className={`embla__dots--${dotsVariant} px-4`}>
+            <div className="embla__viewport" ref={emblaRef}>
+              <div className="embla__container">
+                {slides?.map((slide, index) => (
+                  <div className={`embla__slide ${floatContent ? 'float-content' : ''}`} key={index} style={{ flex: `0 0 ${100 / (slidesToShow || 1)}%` }}>
+                    <SurfacedItem
+                      surfacedItemType="card"
+                      imageSrc={slide?.imageSrc?.url} 
+                      title={slide?.title}
+                      description={slide?.description}
+                      linkLabel={slide?.label}
+                      href={slide?.href}
+                    />
 
-      
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={`embla__controls ${floatContent ? 'float-content' : ''}`}>
+              <div className={`embla__dots ${floatContent ? 'float-content' : ''}`}>
+              {scrollSnaps.map((_, index) => (
+                <button
+                  key={index}
+                  className={`embla__dot ${index === selectedIndex ? 'embla__dot--selected' : ''}`}
+                  onClick={() => emblaApi?.scrollTo(index)}
+                >
+                {
+                  enableIndicatorContent && <p className='embla__indicator-content'> {slides?.[index].indicatorContent} </p>
+                }
+                </button>
+              ))}
+            </div>
+            </div>
+          </div>
+      }
     </div>
   );
 };

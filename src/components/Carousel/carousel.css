@@ -173,6 +173,29 @@
   margin: 0;
 }
 
+.embla__dots--v3 .embla__dots {
+  border-top: 1px solid #fff;
+}
+
+.embla__dots--v3 .embla__dots .embla__dot {
+  border-radius: unset;
+  border-radius: unset;
+  flex: 1;
+  border-top: 4px solid transparent;
+}
+
+.embla__dots--v3 .embla__dots .embla__dot::after {
+  display: none;
+}
+
+.embla__dots--v3 .embla__dots .embla__dot.embla__dot--selected {
+  border-top: 4px solid rgb(254, 0, 12);
+}
+
+.embla__dots--v3 .embla__controls {
+  grid-template-columns: 1fr;
+}
+
 @media (max-width: 768px) {
   .embla__slide.float-content .surfaced-item-content {
     position: unset;
