@@ -16,6 +16,7 @@ export interface HeaderProps {
   onLogin?: () => void;
   onLogout?: () => void;
   onCreateAccount?: () => void;
+  variant?: 'default' | 'hero'
 }
 
 const fallbackNavLinks: MenuProps[] = [
@@ -91,14 +92,16 @@ export const Header = ({
   onLogout,
   onCreateAccount,
   enableMegaMenu,
-  navLinks = []
+  navLinks = [],
+  variant
 }: HeaderProps) => {
 
   const menuToRender: MenuProps[] = navLinks?.length ? navLinks : fallbackNavLinks;
   const [toggleHamburger, setToggleHamburger] = useState(false);
+  const isHero = variant  === 'hero';
 
   return (
-    <header className={`cmp-header relative md:px-11 px-4 py-4 ${enableMegaMenu && 'cmp-mega-nav'} ${toggleHamburger ? 'hamburger-active' : ''}`}>
+    <header className={`cmp-header relative md:px-11 px-4 py-4 ${enableMegaMenu && 'cmp-mega-nav'} ${toggleHamburger ? 'hamburger-active' : ''} ${isHero ? 'cmp-header--hero' : ''}`}>
       
       <section className='flex md:w-fit w-full'>
         <a href='/' className='md:mr-6 banner-img'>

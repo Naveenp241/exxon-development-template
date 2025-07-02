@@ -180,6 +180,8 @@ const Carousel: React.FC<EmblaCarouselProps> = ({ slides, options, slidesToShow,
                 {
                   enableIndicatorContent && <p className='embla__indicator-content'> {slides?.[index].indicatorContent} </p>
                 }
+
+                {index === selectedIndex ? <p className='embla__indicator-title'>{slides?.[selectedIndex].title}</p> : null}
                 </button>
               ))}
             </div>

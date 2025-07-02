@@ -38,3 +38,40 @@
 .mobil-homepage .surfaced-item-link:empty {
     display: none;
 }
+
+.corporate-homepage .embla {
+    padding-top: 0px;
+    max-width: max-content;
+}
+.corporate-homepage .surfaced-item-card {
+    padding: 0px;
+}
+.corporate-homepage .embla__dots--v3{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.corporate-homepage .surfaced-item-card img {
+    margin-bottom: 0;
+}
+.corporate-homepage .embla__slide.float-content .surfaced-item-content {
+    top: 188px;
+    left: 7.14286%;
+    background: none;
+    max-width: 57.14286%;
+}
+.corporate-homepage .cmp-header__wrapper {
+    background: none;
+}
+.corporate-homepage .surfaced-item-title {
+    letter-spacing: -.0625rem;
+    line-height: 4.375rem;
+    font-size: 3.75rem;
+    font-family: math;
+    color: #fff;
+}
+.corporate-homepage .cmp-hero__cta button{
+    color: #fff;
+}
+.corporate-homepage .cmp-hero__cta {
+    padding: 20px 25px;
+}

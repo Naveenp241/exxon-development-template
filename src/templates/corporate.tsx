@@ -133,12 +133,13 @@ const Corporate: Template<TemplateRenderProps> = ({
 
 
     return (
-        <div className="mobil-homepage">
+        <div className="corporate-homepage">
             <Header
                 enableMegaMenu
                 onCreateAccount={() => {}}
                 onLogin={() => {}}
                 onLogout={() => {}}
+                variant="hero"
             />
             {
                 <Carousel

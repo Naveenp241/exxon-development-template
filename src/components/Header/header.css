@@ -45,6 +45,54 @@
   display: none;
 }
 
+/* --- Hero variant support --- */
+.cmp-header--hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  border-bottom: none;
+  z-index: 50;
+  color: white;
+}
+.cmp-header--hero .welcome,
+.cmp-header--hero a,
+.cmp-header--hero button,
+.cmp-header--hero svg {
+  color: white;
+}
+.cmp-header--hero .cmp-header__hamburger {
+  color: white;
+}
+.cmp-header--hero .cmp-header__wrapper {
+  background: rgba(0, 0, 0, 0.8); /* Optional: dark background for mobile nav */
+}
+/* Optional hover tweaks for hero links */
+.cmp-header--hero a:hover {
+  opacity: 0.8;
+}
+
+.cmp-header--hero {
+  transition: background 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;
+}
+.cmp-header--hero:hover {
+  background: white;
+  color: black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* Update nested elements when hovered */
+.cmp-header--hero:hover a,
+.cmp-header--hero:hover .welcome,
+.cmp-header--hero:hover button,
+.cmp-header--hero:hover svg {
+  color: black !important;
+}
+/* Optional: If you use custom styled icons or buttons, override their styles too */
+.cmp-header--hero:hover .cmp-header__hamburger {
+  color: black !important;
+}
+
 @media (max-width: 768px) {
   .cmp-header {
     flex-direction: column;

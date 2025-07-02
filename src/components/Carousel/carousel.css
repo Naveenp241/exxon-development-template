@@ -190,12 +190,23 @@
 
 .embla__dots--v3 .embla__dots .embla__dot.embla__dot--selected {
   border-top: 4px solid rgb(254, 0, 12);
+  margin-top: -2px;
+  justify-content: flex-start;
 }
 
 .embla__dots--v3 .embla__controls {
   grid-template-columns: 1fr;
+    position: relative;
+    top: -200px;
+    padding: 0 9%;
 }
-
+.embla__dots--v3 .embla__indicator-title {
+  color: #fff;
+  padding-top: 20px;
+  font-size: .875rem;
+  line-height: 1.5rem;
+  text-align: left;
+}
 @media (max-width: 768px) {
   .embla__slide.float-content .surfaced-item-content {
     position: unset;
