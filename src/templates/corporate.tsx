@@ -16,6 +16,8 @@ import Carousel from "../components/Carousel/Carousel";
 import Divider from "../components/Divider/Divider";
 import Accordion from "../components/Accordion/Accordion";
 import { HeadingElement } from "../components/HeadingElement/HeadingElement";
+import SingleFeature from "../components/SingleFeature/SingleFeature";
+import StockTicker from "../components/StockTicker/StockTicker";
 import './css/mobilCustomHome.css';
 
 /**
@@ -37,7 +39,9 @@ export const config: TemplateConfig = {
             "slug",
             "c_carousel",
             "c_headingElement",
-            "c_customAccordion"
+            "c_customAccordion",
+            "c_customSingleFeature",
+            "c_customStockTicker"
         ],
         localization: {
             locales: ["en"],
@@ -109,12 +113,18 @@ const Corporate: Template<TemplateRenderProps> = ({
         // slug,
         c_carousel,
         c_headingElement,
-        c_customAccordion
+        c_customAccordion,
+        c_customSingleFeature,
+        c_customStockTicker
     } = document;
 
     console.log("c_carousel ", c_carousel)
     console.log("c_headingElement ", c_headingElement)
     console.log("c_customAccordion ", c_customAccordion)
+    console.log("c_customSingleFeature", c_customSingleFeature);
+    console.log("c_customStockTicker", c_customStockTicker);
+    
+    
 
     const formattedAccordionItems = (c_customAccordion as RawAccordionData[]).map((region) => ({
         id: region.id,
@@ -152,6 +162,28 @@ const Corporate: Template<TemplateRenderProps> = ({
                     floatContent={c_carousel.floatContent}
                 />
             }
+
+            <div className="stockTicker-wrapper">
+                <StockTicker 
+                    stockTickerTitle = {c_customStockTicker.stockTickerTitle}
+                    elementType = {c_customStockTicker.elementType}
+                    stockTickerPrice = {c_customStockTicker.stockTickerPrice}
+                    stockTickerPriceChange = {c_customStockTicker.stockTickerPriceChange}
+                    stockTickerTime = {c_customStockTicker.stockTickerTime}
+                    stockTickerDate = {c_customStockTicker.stockTickerDate}
+                />
+            </div>
+
+            <div className="singleFeature-wrapper mb-12">
+                <SingleFeature 
+                    featureBgImage = {c_customSingleFeature.featureBgImage.url}
+                    featureContent =  {c_customSingleFeature.featureContent}
+                    featureButtonText = {c_customSingleFeature.featureButtonText}
+                    featureButtonLink = {c_customSingleFeature.featureButtonLink}
+                    featureTheme = {c_customSingleFeature.featureTheme}
+                />
+            </div>
+
             <div className="divider-wrapper">
                 <Divider color="#0e469b" width={10} className="mb-8" />
             </div>
@@ -161,6 +193,8 @@ const Corporate: Template<TemplateRenderProps> = ({
 
                 <Accordion items={formattedAccordionItems} accordionInactiveIcon="faAngleDown" accordionActiveIcon="faAngleUp" />
             </div>
+
+            
 
             <Footer />
         </div>

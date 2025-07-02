@@ -1,0 +1,126 @@
+.container {
+  display: flex;
+}
+
+.stockTicker--wrapper {
+  display: flex;
+  align-items: baseline;
+  margin-left: 6rem;
+  padding: 35px 22px;
+}
+
+.stockTicker--item {
+  padding-right: 30px;
+}
+
+.stockTicker--title {
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.stockTicker--data {
+  display: flex;
+  align-items: baseline;
+}
+
+.stockTicker--price-change-group {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.stockTicker--price {
+  font-size: 48px;
+  font-weight: 300;
+}
+
+.stockTicker--change {
+  padding: 0 20px;
+}
+
+.stockTicker--change i {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-right: 6px;
+  vertical-align: middle;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #fe000c;
+}
+
+.stockTicker--dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  background-color: #6d6e71;
+  border-radius: 50%;
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+.stockTicker--meta-text,
+.info .stockTicker--meta-text {
+  font-size: 13px;
+  color: #6d6e71;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  .stockTicker--wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 0;
+    padding: 50px 10px;
+  }
+
+  .stockTicker--item {
+    padding-right: 0;
+    margin-bottom: 12px;
+  }
+
+  .stockTicker--title {
+    font-size: 20px;
+    text-align: left;
+  }
+
+  .stockTicker--data {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .stockTicker--price-change-group {
+    gap: 10px;
+  }
+
+  .stockTicker--price {
+    font-size: 36px;
+  }
+
+  .stockTicker--change {
+    padding: 0;
+  }
+
+  .stockTicker--change i {
+    margin-right: 4px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #fe000c;
+  }
+
+  .stockTicker--meta-text {
+    font-size: 12px;
+  }
+
+  .stockTicker--dot {
+    width: 2.5px;
+    height: 2.5px;
+    margin: 0 6px;
+  }
+}
+
