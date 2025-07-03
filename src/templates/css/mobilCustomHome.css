@@ -195,6 +195,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .stockTicker--wrapper {
+    padding-top: 0;
+  }
+
   .trendingTopics-wrapper {
     flex-direction: column;
     padding: 20px 16px;
@@ -251,10 +255,27 @@
     margin: unset;
   }
 
+  .nearByStation-wrapper .cmp-hero--mobile-img {
+    display: none;
+  }
+
+  .nearByStation-wrapper .cmp-hero__content {
+    min-height: 400px;
+    background-image: url(https://a.mktgcdn.com/p/WB1QYDdO7y6Z_O9rMGhmZTUVM-ivo02OgmU-vOGY6v0/2048x850.jpg);
+  }
+
   .image-wrapper {
     margin: unset;
     padding: unset;
     max-width: 350px;
+  }
+
+  .image-wrapper figcaption {
+    text-align: center;
+  }
+
+  .paragraph-column {
+    align-items: center;
   }
 
   .mobileView {
@@ -263,5 +284,43 @@
 
   .desktopView {
     display: none;
+  }
+
+  .embla .surfaced-item-title {
+    line-height: 0;
+    font-size: 0;
+    margin-bottom: 0;
+    font-weight: 0;
+  }
+
+  .embla__dot.embla__dot--selected .embla__indicator-title {
+    display: none;
+  }
+
+  .embla .cmp-hero__cta {
+    padding: unset;
+  }
+
+  .embla .cmp-hero__cta .storybook-button {
+    padding: 6px;
+  }
+
+  .embla .cmp-hero__cta {
+    position: relative;
+    top: -9rem;
+    left: 2rem;
+  }
+
+  .embla .embla__dots {
+    position: relative;
+    top: 4rem;
+  }
+
+  .embla .surfaced-item-title {
+    position: relative;
+    bottom: 9.2rem;
+    left: 2rem;
+    line-height: 21px;
+    font-size: 19px;
   }
 }

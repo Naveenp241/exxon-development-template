@@ -421,7 +421,6 @@ const Corporate: Template<TemplateRenderProps> = ({
             ))}
         </div>
       </div>
-
       <Footer />
     </div>
   );
