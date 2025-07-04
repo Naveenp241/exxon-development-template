@@ -17,6 +17,7 @@ import Divider from "../components/Divider/Divider";
 import Accordion from "../components/Accordion/Accordion";
 import { HeadingElement } from "../components/HeadingElement/HeadingElement";
 import './css/mobilCustomHome.css';
+import { sharedHeadTags } from "../utils/sharedHeadTags";
 
 /**
  * Required when Knowledge Graph data is used for a template.
@@ -65,6 +66,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         charset: "UTF-8",
         viewport: "width=device-width, initial-scale=1",
         tags: [
+      ...sharedHeadTags,
         {
             type: "meta",
             attributes: {

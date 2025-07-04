@@ -19,6 +19,7 @@ import { TopicContainer } from "../components/TopicContainer/TopicContainer";
 
 import Divider from "../components/Divider/Divider";
 import "./css/mobilTemplate.css";
+import { sharedHeadTags } from "../utils/sharedHeadTags";
 
 /**
  * Required when Knowledge Graph data is used for a template.
@@ -68,6 +69,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
+      ...sharedHeadTags,
       {
         type: "meta",
         attributes: {

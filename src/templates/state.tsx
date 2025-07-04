@@ -15,6 +15,7 @@ import Banner from "../components/Banner";
 import DirectoryStateGrid from "../components/DirectoryStateGrid";
 import PageLayout from "../components/PageLayout";
 import Breadcrumbs from "../components/Breadcrumbs";
+import { sharedHeadTags } from "../utils/sharedHeadTags";
 
 export const config: TemplateConfig = {
   stream: {
@@ -61,6 +62,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
+      ...sharedHeadTags,
       {
         type: "link",
         attributes: {

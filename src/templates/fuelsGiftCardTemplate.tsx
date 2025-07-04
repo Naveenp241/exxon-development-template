@@ -19,6 +19,7 @@ import { Heading } from "../components/Heading/Heading";
 import { HeadingElement } from "../components/HeadingElement/HeadingElement";
 import Accordion from "../components/Accordion/Accordion";
 import "./css/fuelsGiftCardTemplate.css";
+import { sharedHeadTags } from "../utils/sharedHeadTags";
 
 export const config: TemplateConfig = {
   stream: {
@@ -64,6 +65,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
+      ...sharedHeadTags,
       {
         type: "meta",
         attributes: {

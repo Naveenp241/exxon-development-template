@@ -19,6 +19,7 @@ import { Header } from "../components/Header/Header";
 import StationSearchBar from "../components/MobilSearch/StationSearchBar";
 import StationList from "../components/MobilSearch/StationList";
 import StationMap from "../components/MobilSearch/StationMap";
+import { sharedHeadTags } from "../utils/sharedHeadTags";
 
 import "../index.css";
 
@@ -44,6 +45,10 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 
 export const getHeadConfig: GetHeadConfig<TemplateProps> = ({ document }) => ({
   title: document.name,
+  tags: [
+    ...sharedHeadTags,
+    // ...existing tags...
+  ],
 });
 
 interface MenuProps {

@@ -27,6 +27,7 @@ import Details from "../components/Details";
 import Hours from "../components/Hours";
 import PageLayout from "../components/PageLayout";
 import BreadCrumbs from "../components/Breadcrumbs";
+import { sharedHeadTags } from "../utils/sharedHeadTags";
 
 /**
  * Required when Knowledge Graph data is used for a template.
@@ -123,6 +124,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
           // href: Favicon,
         },
       },
+      ...sharedHeadTags,
     ],
   };
 };

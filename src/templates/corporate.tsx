@@ -23,6 +23,7 @@ import NearByStation from "../components/NearByStations/NearByStation";
 import { Image } from "../components/Image/Image";
 import Paragraph from "../components/Paragraph/Paragraph";
 import Divider from "../components/Divider/Divider";
+import { sharedHeadTags } from "../utils/sharedHeadTags";
 import "./css/mobilCustomHome.css";
 
 /**
@@ -81,6 +82,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
+      ...sharedHeadTags,
       {
         type: "meta",
         attributes: {
