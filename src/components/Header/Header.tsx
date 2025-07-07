@@ -26,7 +26,7 @@ const fallbackNavLinks: MenuProps[] = [
     items: [
       {
         title: 'Exxon',
-        path: '#',
+        path: '/exxon-home',
         items: [
           { title: 'Rewards & Credit Cards', path: '#' },
           { title: 'Our Fuel', path: '#' },
