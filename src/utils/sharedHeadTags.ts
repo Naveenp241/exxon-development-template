@@ -1,4 +1,4 @@
-const FONT_PATH = process.env.PUBLIC_URL ? `${process.env.PUBLIC_URL}/assets/fonts` : "assets/fonts";
+const FONT_PATH = "/src/assets/fonts";
 
 export const sharedHeadTags = [
   {
