@@ -85,6 +85,33 @@
   padding: 20px 25px 20px 10px;
 }
 
+.corporate-homepage .banner-img img {
+  visibility: hidden;
+}
+
+.corporate-homepage .banner-img {
+  background-image: url(https://corporate.exxonmobil.com/-/media/global/icons/logos/exxonmobillogocolor2x.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  width: 120px;
+  height: 40px;
+  position: relative;
+  top: 5px;
+  border-bottom: none;
+}
+
+.stockTicker--price p {
+  font-size: 48px;
+  font-weight: 300;
+}
+
+.SingleFeatureInfo__wrapper .cmp-hero--corporate-main .cmp-hero__content {
+  margin-left: unset;
+  padding: 70px 130px 70px 0;
+}
+
 .nearByStation-wrapper .cmp-hero {
   min-height: 500px;
   max-height: 600px;
@@ -92,6 +119,16 @@
 
 .nearByStation-wrapper .cmp-hero__subtext {
   max-width: 850px;
+}
+
+.nearByStation-wrapper .cmp-hero__title {
+  font-size: 48px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.nearByStation-wrapper .cmp-hero__subtext {
+  line-height: 24px;
 }
 
 .trendingTopics-content .surfaced-item-card img {
@@ -122,11 +159,16 @@
   max-width: 480px;
 }
 
+.highlightContent-wrapper .fuels-card__image{
+  margin-bottom: 20px;
+}
+
 .highlightContent-content .fuels-card__title {
   text-transform: uppercase;
   font-size: 13px;
   color: #333333;
   letter-spacing: 1px;
+  margin-bottom: 12px;
 }
 
 .highlightContent-content .fuels-card__description {
@@ -138,20 +180,17 @@
   display: none;
 }
 
-.image-wrapper figcaption {
-  margin: 20px 0;
-  font-size: 34px;
-  font-weight: 300;
-}
-
-.paragraph-columns .paragraph-block__text {
-  font-size: 20px;
+.footer-nav__title, .footer-nav__link {
   color: #333333;
-  padding-bottom: 16px;
-  margin: unset;
 }
 
-.paragraph-columns .paragraph-block__text:hover {
+.footerNav-wrapper .footer-nav__wrapper {
+  justify-content: center;
+  margin: 20px 90px 0;
+  gap: unset;
+}
+
+.footer-nav__link:hover {
   color: #d5000a;
   text-decoration: underline;
 }
@@ -184,14 +223,6 @@
 .latestNews-content .highlight--description {
   font-size: 13px;
   padding-bottom: unset;
-}
-
-.mobileView {
-  display: none;
-}
-
-.desktopView {
-  display: block;
 }
 
 @media screen and (max-width: 480px) {
@@ -264,28 +295,6 @@
     background-image: url(https://a.mktgcdn.com/p/WB1QYDdO7y6Z_O9rMGhmZTUVM-ivo02OgmU-vOGY6v0/2048x850.jpg);
   }
 
-  .image-wrapper {
-    margin: unset;
-    padding: unset;
-    max-width: 350px;
-  }
-
-  .image-wrapper figcaption {
-    text-align: center;
-  }
-
-  .paragraph-column {
-    align-items: center;
-  }
-
-  .mobileView {
-    display: block;
-  }
-
-  .desktopView {
-    display: none;
-  }
-
   .embla .surfaced-item-title {
     line-height: 0;
     font-size: 0;
@@ -322,5 +331,31 @@
     left: 2rem;
     line-height: 21px;
     font-size: 19px;
+  }
+
+  .footerNav-wrapper {
+    padding-top: unset;
+  }
+  
+  .footerNav-wrapper .footer-nav__wrapper {
+    margin: 0 20px;
+
+  }
+
+  .footer-nav__column {
+    padding: 20px 0;
+  }
+
+  .singleFeature-wrapper .cmp-hero__content div{
+    min-width: 250px;
+    margin-left: 2rem;
+  }
+
+  .singleFeature-wrapper .cmp-hero__content .cmp-hero__subtext {
+    font-size: 25px;
+  }
+
+  .singleFeature-wrapper .cmp-hero__content .cmp-hero__cta {
+    margin-left: unset;
   }
 }

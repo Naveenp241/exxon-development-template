@@ -20,8 +20,8 @@ import { SurfacedItem } from "../components/SurfacedItem/SurfacedItem";
 import { Heading } from "../components/Heading/Heading";
 import FuelsCard from "../components/FuelsCard/FuelsCard";
 import NearByStation from "../components/NearByStations/NearByStation";
-import { Image } from "../components/Image/Image";
-import Paragraph from "../components/Paragraph/Paragraph";
+import FooterNav from "../components/FooterNav/FooterNav";
+
 import Divider from "../components/Divider/Divider";
 import { sharedHeadTags } from "../utils/sharedHeadTags";
 import "./css/mobilCustomHome.css";
@@ -53,8 +53,9 @@ export const config: TemplateConfig = {
       "c_customTitledesc",
       "c_fuelCard",
       "c_nearByStation",
-      "c_customImage",
-      "c_paragraph",
+      // "c_customImage",
+      // "c_paragraph",
+      "c_footerNav",
       "c_latestNews",
       "c_divider",
     ],
@@ -125,19 +126,16 @@ interface FuelCardData {
   linkUrl: string;
 }
 
-interface ImageData {
-  src: {
-    url: string;
-  };
-  alt: string;
-  className: string;
-  width: number | string;
-  height: number | string;
-  caption: string;
-}
+// interface FooterNavData {
+//   items: FooterNavItem[];
+// }
 
-interface ParagraphData {
-  content: string;
+interface FooterNavItem {
+  imageUrl?: {
+    url?: string;
+  };
+  title: string;
+  text: string[];
 }
 
 interface LatestNewsData {
@@ -162,11 +160,32 @@ const Corporate: Template<TemplateRenderProps> = ({
     c_customTitledesc,
     c_fuelCard,
     c_nearByStation,
-    c_customImage,
-    c_paragraph,
+    c_footerNav,
+    // c_customImage,
+    // c_paragraph,
     c_latestNews,
     c_divider,
   } = document;
+
+  console.log("c_footerNav", c_footerNav);
+  console.log("c_footerNav.items", c_footerNav[0]?.items);
+  
+
+  const transformedFooterNav = Array.isArray(c_footerNav[0]?.items)
+  ? c_footerNav[0].items.map((item: FooterNavItem) => ({
+      imageUrl: item.imageUrl?.url || "",
+      title: item.title,
+      links: Array.isArray(item.text)
+        ? item.text.map((linkText: string) => ({
+            text: linkText,
+            url: "#",
+          }))
+        : [],
+    }))
+  : [];
+
+
+  console.log(transformedFooterNav, "transformedFooterNav");
 
   return (
     <div className="corporate-homepage">
@@ -201,15 +220,17 @@ const Corporate: Template<TemplateRenderProps> = ({
         />
       }
 
-      {
+      <div className="singleFeature-wrapper">
+        
         <SingleFeature
           featureBgImage={c_customSingleFeature.featureBgImage.url}
           featureContent={c_customSingleFeature.featureContent}
           featureButtonText={c_customSingleFeature.featureButtonText}
           featureButtonLink={c_customSingleFeature.featureButtonLink}
           featureTheme={c_customSingleFeature.featureTheme}
-        />
-      }
+          />
+          </div>
+      
 
       <div className="trendingTopics-wrapper py-20 flex">
         <div className="trendingTopics-left ml-28">
@@ -318,110 +339,12 @@ const Corporate: Template<TemplateRenderProps> = ({
         />
       </div>
 
-      <div className="desktopView">
-        <div className="image-container bg-gray-100 flex">
-          <div className="image-wrapper py-20 mt-10 mx-28">
-            {c_customImage && (
-              <ul className="grid md:grid-cols-3 grid-cols-1 gap-4">
-                {c_customImage.map((ele: ImageData, index: number) => (
-                  <li key={index}>
-                    <Image
-                      src={ele.src.url}
-                      caption={ele.caption || ""}
-                      width={ele.width}
-                      height={ele.height}
-                      className={ele.className || ""}
-                      alt={ele.alt || ""}
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            <div className="paragraph-columns flex gap-40">
-              <div className="column-1 flex flex-col">
-                {c_paragraph
-                  .slice(0, 6)
-                  .map((para: ParagraphData, idx: number) => (
-                    <Paragraph key={`col1-${idx}`} paragraph={para.content} />
-                  ))}
-              </div>
-
-              <div className="column-2 flex flex-col pb-4 ml-[60px]">
-                {c_paragraph
-                  .slice(6, 11)
-                  .map((para: ParagraphData, idx: number) => (
-                    <Paragraph key={`col2-${idx}`} paragraph={para.content} />
-                  ))}
-              </div>
-
-              <div className="column-3 flex flex-col pb-4 ml-[94px]">
-                {c_paragraph
-                  .slice(11, 15)
-                  .map((para: ParagraphData, idx: number) => (
-                    <Paragraph key={`col3-${idx}`} paragraph={para.content} />
-                  ))}
-              </div>
-            </div>
+      <div className="footerNav-container">
+        {transformedFooterNav.length > 0 && (
+          <div className="footerNav-wrapper bg-gray-50 py-20">
+            <FooterNav items={transformedFooterNav} />
           </div>
-        </div>
-      </div>
-
-      <div className="mobileView">
-        <div className="image-container bg-gray-100 flex flex-col md:flex-row">
-          {c_customImage &&
-            c_customImage.map((ele: ImageData, index: number) => (
-              <div
-                key={index}
-                className="flex flex-col md:flex-row md:items-start mb-8"
-              >
-                <div className="image-wrapper md:mr-10">
-                  <Image
-                    src={ele.src.url}
-                    caption={ele.caption || ""}
-                    width={ele.width}
-                    height={ele.height}
-                    className={ele.className || ""}
-                    alt={ele.alt || ""}
-                  />
-                </div>
-
-                <div className="paragraph-column flex flex-col mt-4 md:mt-0">
-                  {(() => {
-                    if (index === 0) {
-                      return c_paragraph
-                        .slice(0, 6)
-                        .map((para: ParagraphData, idx: number) => (
-                          <Paragraph
-                            key={`col1-${idx}`}
-                            paragraph={para.content}
-                          />
-                        ));
-                    } else if (index === 1) {
-                      return c_paragraph
-                        .slice(6, 11)
-                        .map((para: ParagraphData, idx: number) => (
-                          <Paragraph
-                            key={`col2-${idx}`}
-                            paragraph={para.content}
-                          />
-                        ));
-                    } else if (index === 2) {
-                      return c_paragraph
-                        .slice(11, 15)
-                        .map((para: ParagraphData, idx: number) => (
-                          <Paragraph
-                            key={`col3-${idx}`}
-                            paragraph={para.content}
-                          />
-                        ));
-                    }
-                    return null;
-                  })()}
-                </div>
-              </div>
-            ))}
-        </div>
+        )}
       </div>
       <Footer />
     </div>
