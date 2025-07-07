@@ -22,7 +22,7 @@ export interface HeaderProps {
 const fallbackNavLinks: MenuProps[] = [
   {
     title: 'Fuels',
-    path: '/fuels',
+    path: '/fuels-exxon',
     items: [
       {
         title: 'Exxon',
@@ -35,20 +35,20 @@ const fallbackNavLinks: MenuProps[] = [
       },
       {
         title: 'Mobil',
-        path: '#',
+        path: '/home-mobil',
         items: [
           { title: 'Rewards & Credit Cards', path: '#' },
           { title: 'Our Fuel', path: '#' }
         ]
       },
-      { title: 'Gas Near You', path: '#' },
+      { title: 'Gas Near You', path: '/mobil-search' },
       { title: 'Get Help', path: '#' },
       { title: 'Wholesale Fuels', path: '#' }
     ]
   },
   {
     title: 'Lubricants',
-    path: '#',
+    path: '/lubricants',
     items: [
       {
         title: 'Mobil Oil',
