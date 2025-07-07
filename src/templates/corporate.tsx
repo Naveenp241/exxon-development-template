@@ -126,10 +126,6 @@ interface FuelCardData {
   linkUrl: string;
 }
 
-// interface FooterNavData {
-//   items: FooterNavItem[];
-// }
-
 interface FooterNavItem {
   imageUrl?: {
     url?: string;
@@ -161,8 +157,6 @@ const Corporate: Template<TemplateRenderProps> = ({
     c_fuelCard,
     c_nearByStation,
     c_footerNav,
-    // c_customImage,
-    // c_paragraph,
     c_latestNews,
     c_divider,
   } = document;
