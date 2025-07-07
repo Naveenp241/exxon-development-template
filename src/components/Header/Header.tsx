@@ -104,7 +104,7 @@ export const Header = ({
     <header className={`cmp-header relative md:px-11 px-4 py-4 ${enableMegaMenu && 'cmp-mega-nav'} ${toggleHamburger ? 'hamburger-active' : ''} ${isHero ? 'cmp-header--hero' : ''}`}>
       
       <section className='flex md:w-fit w-full'>
-        <a href='/' className='md:mr-6 banner-img'>
+        <a href='/exxon-corporate' className='md:mr-6 banner-img'>
           <img src={ExxonMobile} alt="Exxon Mobile" className='mt-1' />
         </a>
 
