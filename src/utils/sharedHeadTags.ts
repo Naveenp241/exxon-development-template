@@ -1,11 +1,11 @@
-const FONT_PATH = "/src/assets/fonts";
+const FONT_PATH = process.env.PUBLIC_URL ? `${process.env.PUBLIC_URL}/assets/fonts` : "/src/assets/fonts";
 
 export const sharedHeadTags = [
   {
     type: "link" as const,
     attributes: {
       rel: "preload",
-      href: `${FONT_PATH}/exxom-icons.ttf`,
+      href: `${FONT_PATH}/exxon-icons.ttf`,
       as: "font",
       type: "font/ttf",
       crossorigin: "anonymous",
