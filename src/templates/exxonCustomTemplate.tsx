@@ -177,7 +177,7 @@ const ExxonCustomTemplate: Template<TemplateRenderProps> = ({ document }) => {
         />
       </div>
 
-      <div className="px-8 mt-8 w-full">
+      <div className="surfacedItem-container px-8 mt-8 w-full">
         {/* Surfaced Items */}
         {c_surfacedItem && (
           <ul className="grid md:grid-cols-2 grid-cols-1 gap-4 mb-8">

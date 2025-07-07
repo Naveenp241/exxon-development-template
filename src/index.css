@@ -37,3 +37,16 @@
 .width-540  {
   width: 540px;
 }
+
+.surfacedItem-container .surfaced-item-description .cmp-hero__cta button{
+    background-color: white !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    text-align: left;
+    font-weight: 300;
+}
+
+.surfacedItem-container .surfaced-item-content .cmp-hero__cta {
+    color: #0e469b;
+    text-decoration: underline;
+}
