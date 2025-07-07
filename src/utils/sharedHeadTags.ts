@@ -1,4 +1,4 @@
-const FONT_PATH = "/src/assets/fonts";
+const FONT_PATH = "/assets/fonts";
 
 export const sharedHeadTags = [
   {
