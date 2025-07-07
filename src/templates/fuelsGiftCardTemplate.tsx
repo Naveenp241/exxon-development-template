@@ -266,7 +266,7 @@ const FuelsGiftCardTemplate: Template<TemplateRenderProps> = ({ document }) => {
 
       {/* 4 Column Surfaced Items */}
 
-        <div className="px-4">
+        <div className="surfacedItem-container px-4">
          {c_4colSurfacedItem && (
         <ul
           className={`

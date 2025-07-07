@@ -152,7 +152,7 @@ const LubesHomePageTemplate: Template<TemplateRenderProps> = ({ document }) => {
         )}
       </div>
 
-      <div className="px-8 w-full">
+      <div className="px-8 w-full surfacedItem-container">
         {c_surfacedItem && (
           <div className="mb-8">
             <ul className="grid md:grid-cols-3 grid-cols-1 gap-4">

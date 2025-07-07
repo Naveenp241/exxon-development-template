@@ -49,6 +49,10 @@
 }
 
 .corporate-homepage .embla__dots--v3 {
+  max-height: 856px;
+}
+
+.corporate-homepage .embla__dots--v3 {
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -112,6 +116,15 @@
   padding: 70px 130px 70px 0;
 }
 
+.SingleFeatureInfo__wrapper .cmp-hero__cta a {
+  padding: 20px 25px;
+  min-width: 170px;
+}
+
+.SingleFeatureInfo__wrapper .cmp-hero__content .cmp-hero__subtext {
+  line-height: 40px;
+}
+
 .nearByStation-wrapper .cmp-hero {
   min-height: 500px;
   max-height: 600px;
@@ -136,7 +149,7 @@
 }
 
 .trendingTopics-content .surfaced-item-title {
-  color: #000000;
+  color: #333;
   font-size: 24px;
   font-weight: 300;
 }
@@ -159,7 +172,7 @@
   max-width: 480px;
 }
 
-.highlightContent-wrapper .fuels-card__image{
+.highlightContent-wrapper .fuels-card__image {
   margin-bottom: 20px;
 }
 
@@ -180,7 +193,8 @@
   display: none;
 }
 
-.footer-nav__title, .footer-nav__link {
+.footer-nav__title,
+.footer-nav__link {
   color: #333333;
 }
 
@@ -223,6 +237,18 @@
 .latestNews-content .highlight--description {
   font-size: 13px;
   padding-bottom: unset;
+}
+
+.carousel-wrapper .surfaced-item-description .cmp-hero__cta button {
+  background-color: white !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  text-align: left;
+  font-weight: 300;
+}
+
+.nearByStation-wrapper .cmp-hero__cta a {
+  padding: 20px 25px;
 }
 
 @media screen and (max-width: 480px) {
@@ -336,17 +362,16 @@
   .footerNav-wrapper {
     padding-top: unset;
   }
-  
+
   .footerNav-wrapper .footer-nav__wrapper {
     margin: 0 20px;
-
   }
 
   .footer-nav__column {
     padding: 20px 0;
   }
 
-  .singleFeature-wrapper .cmp-hero__content div{
+  .singleFeature-wrapper .cmp-hero__content div {
     min-width: 250px;
     margin-left: 2rem;
   }
